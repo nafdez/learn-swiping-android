@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".ui.auth.fragments.SignUpFragment">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="@string/auth_signup_txt_account_creation"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/form_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/form_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/btnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_text_layout"
+            style="@style/Widget.App.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="example@example.com"
+            app:helperTextEnabled="true"
+            app:helperTextTextAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:startIconDrawable="@drawable/ic_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRegEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/auth_txt_email"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtRegLayName"
+            style="@style/Widget.App.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_id_card">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRegName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/auth_txt_name"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_text_layout"
+            style="@style/Widget.App.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_account">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRegUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/auth_txt_username"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_sign_layout"
+            style="@style/Widget.App.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRegPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/auth_txt_password"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtRegUsername" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        style="@style/Widget.Material3.Button.Icon"
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/auth_signup_btn_sign_up"
+        app:icon="@drawable/ic_add_circle_24px"
+        app:layout_constraintBottom_toTopOf="@id/btnGoBack"
+        app:layout_constraintStart_toStartOf="@id/btnGoBack" />
+
+    <Button
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:id="@+id/btnGoBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:icon="@drawable/ic_back"
+        android:text="@string/auth_signup_btn_go_back_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Learn Swiping</string>
+    <string name="title_home">Home</string>
+    <string name="title_study">Study</string>
+    <string name="title_exam">Exam</string>
+
+    <!--  Auth  -->
+    <string name="auth_btn_login">Login</string>
+    <string name="auth_btn_sign_up">Create account</string>
+    <string name="auth_btn_login_google">Google</string>
+
+    <string name="auth_txt_username">Username</string>
+    <string name="auth_txt_password">Password</string>
+    <string name="auth_txt_email">Email</string>
+    <string name="auth_txt_name">Name</string>
+
+    <string name="auth_signup_txt_account_creation">Account creation</string>
+    <string name="auth_signup_btn_sign_up">Create</string>
+    <string name="auth_signup_btn_go_back_login">Go back to login</string>
+
+</resources>
