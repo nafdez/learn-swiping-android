@@ -1,10 +1,8 @@
 package es.ignaciofp.learnswiping.ui.auth.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -14,10 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import java.time.format.DateTimeFormatter;
 
-import es.ignaciofp.learnswiping.R;
-import es.ignaciofp.learnswiping.callables.OnErrorCallable;
+import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentLoginBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.User;
@@ -41,7 +38,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText txtEditUsername;
     private EditText txtEditPassword;
-    private OnErrorCallable onLoginError;
+    private APICallback<User> loginCallback;
 
     public LoginFragment() {
     }
@@ -92,11 +89,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         txtEditUsername.setText(username);
         txtEditPassword.setText(password);
 
-        onLoginError = new OnErrorCallable(requireContext()) {
+        loginCallback = new APICallback<User>(requireContext()) {
             @Override
-            public Void call() {
+            public void call() {
+                showDialog("Login OK!", String.format("Logged as: %s\nToken: %s\nSince: %s", getObj().getUsername(), getObj().getToken(), getObj().getSince().format(DateTimeFormatter.ISO_DATE)));
+            }
+
+            @Override
+            public void error() {
                 showAlert("Login failed");
-                return null;
             }
         };
 
@@ -105,22 +106,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.d("PEPELUI", "PEPELUIII");
         switch (v.getTag().toString()) {
             case "loginButton":
                 String username = txtEditUsername.getText().toString().replaceAll("\\s+", "");
                 String password = txtEditPassword.getText().toString().trim();
+
+                if (username.isEmpty() && password.isEmpty()) return;
+
                 User user = new User();
                 user.setUsername(username);
                 user.setPassword(password);
 
-                if (UserManager.getInstance().login(user, onLoginError)) {
-                    new MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("No deck found")
-                            .setMessage(String.format("Logged as: %s\nToken: %s\nSince: %s", user.getUsername(), user.getToken(), user.getSince()))
-                            .setPositiveButton("OK", (dialog, which) -> {
-                    }).show();
-                }
+                UserManager.getInstance().login(user, loginCallback);
                 break;
             case "signUpButton":
                 Log.d("PEPELUI", "spsdf");

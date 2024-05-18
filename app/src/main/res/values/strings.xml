@@ -4,6 +4,10 @@
     <string name="title_study">Study</string>
     <string name="title_exam">Exam</string>
 
+    <!-- APP WIDE STRINGS -->
+    <string name="global_dialog_positive">OK</string>
+    <string name="global_dialog_negative">Cancel</string>
+
     <!--  Auth  -->
     <string name="auth_btn_login">Login</string>
     <string name="auth_btn_sign_up">Create account</string>

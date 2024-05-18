@@ -11,12 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textfield.TextInputEditText;
-
-import es.ignaciofp.learnswiping.R;
-import es.ignaciofp.learnswiping.callables.OnErrorCallable;
-import es.ignaciofp.learnswiping.databinding.FragmentLoginBinding;
+import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentSignUpBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.User;
@@ -42,7 +37,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private EditText txtEditName;
     private EditText txtEditUsername;
     private EditText txtEditPassword;
-    private OnErrorCallable onSignUpError;
+    private APICallback<User> signUpCallback;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -97,11 +92,15 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         txtEditUsername.setText(username);
         txtEditPassword.setText(password);
 
-        onSignUpError = new OnErrorCallable(requireContext()) {
+        signUpCallback = new APICallback<User>(requireContext()) {
             @Override
-            public Void call() {
-                showAlert("Sign up failed");
-                return null;
+            public void call() {
+                showDialog("User created!", String.format("Logged as: %s\nToken: %s\nSince: %s", getObj().getUsername(), getObj().getToken(), getObj().getSince()));
+            }
+
+            @Override
+            public void error() {
+                showAlert("Sign-up failed");
             }
         };
 
@@ -116,19 +115,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 String name = txtEditName.getText().toString().trim();
                 username = txtEditUsername.getText().toString().replaceAll("\\s+", "");
                 password = txtEditPassword.getText().toString().trim();
+
+                if (email.isEmpty() && name.isEmpty() && username.isEmpty() && password.isEmpty()) return;
+
                 User user = new User();
                 user.setEmail(email);
                 user.setName(name);
                 user.setUsername(username);
                 user.setPassword(password);
 
-                if (UserManager.getInstance().register(user, onSignUpError)) {
-                    new MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("User created!")
-                            .setMessage(String.format("Logged as: %s\nToken: %s\nSince: %s", user.getUsername(), user.getToken(), user.getSince()))
-                            .setPositiveButton("OK", (dialog, which) -> {
-                            }).show();
-                }
+                UserManager.getInstance().register(user, signUpCallback);
+
                 break;
             case "goBackButton":
                 username = txtEditUsername.getText().toString().replaceAll("\\s+", "");

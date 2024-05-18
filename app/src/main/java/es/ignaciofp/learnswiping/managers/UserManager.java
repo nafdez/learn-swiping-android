@@ -1,8 +1,6 @@
 package es.ignaciofp.learnswiping.managers;
 
-import java.util.concurrent.Callable;
-
-import es.ignaciofp.learnswiping.callables.OnErrorCallable;
+import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.models.User;
 import es.ignaciofp.learnswiping.service.UserAPIService;
 
@@ -19,13 +17,11 @@ public class UserManager {
         return instance;
     }
 
-    public boolean register(User user, OnErrorCallable onError) {
-        user = UserAPIService.Register(user, onError);
-        return user != null;
+    public void register(User user, APICallback<User> callback) {
+        UserAPIService.Register(user, callback);
     }
 
-    public boolean login(User user, OnErrorCallable onError) {
-        user = UserAPIService.Login(user, onError);
-        return user != null;
+    public void login(User user, APICallback<User> callback) {
+        UserAPIService.Login(user, callback);
     }
 }
