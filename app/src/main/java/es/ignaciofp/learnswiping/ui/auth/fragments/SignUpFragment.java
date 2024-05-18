@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentSignUpBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
@@ -95,12 +96,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         signUpCallback = new APICallback<User>(requireContext()) {
             @Override
             public void call() {
-                showDialog("User created!", String.format("Logged as: %s\nToken: %s\nSince: %s", getObj().getUsername(), getObj().getToken(), getObj().getSince()));
+                showAlert(CONTEXT.getString(R.string.auth_alert_sign_up_ok));
+                goToLoginFragment();
             }
 
             @Override
             public void error() {
-                showAlert("Sign-up failed");
+                showAlert(CONTEXT.getString(R.string.global_generic_error));
             }
         };
 
@@ -128,10 +130,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case "goBackButton":
-                username = txtEditUsername.getText().toString().replaceAll("\\s+", "");
-                password = txtEditPassword.getText().toString().trim();
-                authActivity.changeFragment(new LoginFragment(), username, password);
+                goToLoginFragment();
                 break;
         }
+    }
+
+    private void goToLoginFragment() {
+        username = txtEditUsername.getText().toString().replaceAll("\\s+", "");
+        password = txtEditPassword.getText().toString().trim();
+        authActivity.changeFragment(new LoginFragment(), username, password);
     }
 }

@@ -7,6 +7,7 @@
     <!-- APP WIDE STRINGS -->
     <string name="global_dialog_positive">OK</string>
     <string name="global_dialog_negative">Cancel</string>
+    <string name="global_generic_error">Something went wrong</string>
 
     <!--  Auth  -->
     <string name="auth_btn_login">Login</string>
@@ -21,5 +22,8 @@
     <string name="auth_signup_txt_account_creation">Account creation</string>
     <string name="auth_signup_btn_sign_up">Create</string>
     <string name="auth_signup_btn_go_back_login">Go back to login</string>
+
+    <string name="auth_alert_login_ok">Logging as</string>
+    <string name="auth_alert_sign_up_ok">Account created successfully</string>
 
 </resources>

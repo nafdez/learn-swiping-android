@@ -28,7 +28,7 @@ public class UserAPIService {
     private static final String LOGIN = "auth/login";
 
     private UserAPIService() {
-        client = new OkHttpClient();
+        CLIENT = new OkHttpClient();
     }
 
     public static UserAPIService getInstance() {
@@ -55,28 +55,10 @@ public class UserAPIService {
         });
     }
 
-    private Request makeJSONRequest(String endpoint, String json) {
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(json, mediaType);
-        return new Request.Builder()
-                .url(Constants.BASE_URL + endpoint)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .build();
-    }
-
-    public static void Login(User user, APICallback<User> callback) {
+    public void Login(User user, APICallback<User> callback) {
         String json = String.format("{\"username\":\"%s\",\"password\":\"%s\"}", user.getUsername(), user.getPassword());
 
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(json, mediaType);
-        Request request = new Request.Builder()
-                .url(Constants.BASE_URL + LOGIN)
-                .post(body)
-                .addHeader("Content-Type", "application/json").build();
-
-        client.newCall(request).enqueue(new Callback() {
+        CLIENT.newCall(makeJSONRequest(LOGIN, json)).enqueue(new Callback() {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
@@ -92,4 +74,15 @@ public class UserAPIService {
             }
         });
     }
+
+    private Request makeJSONRequest(String endpoint, String json) {
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(json, mediaType);
+        return new Request.Builder()
+                .url(Constants.BASE_URL + endpoint)
+                .post(body)
+                .addHeader("Content-Type", "application/json")
+                .build();
+    }
+
 }

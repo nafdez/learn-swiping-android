@@ -13,7 +13,7 @@ import es.ignaciofp.learnswiping.R;
 
 public abstract class APICallback<T> {
 
-    private final Context CONTEXT;
+    protected final Context CONTEXT;
     private T obj;
     private List<T> list;
 

@@ -7,6 +7,7 @@ import es.ignaciofp.learnswiping.service.UserAPIService;
 public class UserManager {
 
     private static UserManager instance;
+    private final UserAPIService API_SERVICE = UserAPIService.getInstance();
     private User user;
 
     private UserManager() {
@@ -18,10 +19,10 @@ public class UserManager {
     }
 
     public void register(User user, APICallback<User> callback) {
-        UserAPIService.Register(user, callback);
+        API_SERVICE.Register(user, callback);
     }
 
     public void login(User user, APICallback<User> callback) {
-        UserAPIService.Login(user, callback);
+        API_SERVICE.Login(user, callback);
     }
 }

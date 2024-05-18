@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import java.time.format.DateTimeFormatter;
 
+import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentLoginBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
@@ -92,7 +93,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         loginCallback = new APICallback<User>(requireContext()) {
             @Override
             public void call() {
-                showDialog("Login OK!", String.format("Logged as: %s\nToken: %s\nSince: %s", getObj().getUsername(), getObj().getToken(), getObj().getSince().format(DateTimeFormatter.ISO_DATE)));
+                showAlert(CONTEXT.getString(R.string.auth_alert_login_ok) + " " + getObj().getUsername());
+                // TODO:
+                // User manager => store token and user (cannot do it directly bc using callbacks)
+                // start MainActivity
             }
 
             @Override
