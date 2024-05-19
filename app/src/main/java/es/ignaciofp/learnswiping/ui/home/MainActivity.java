@@ -1,18 +1,24 @@
 package es.ignaciofp.learnswiping.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.R;
+import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.ActivityMainBinding;
+import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.ui.auth.AuthActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,17 +29,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(new Intent(this, AuthActivity.class));
+        // When opening the app user in UserManager will be null
+        // so request a login via token (if any)
+        // If rejected, then go to auth activity
+        // TODO: login with token fails
+        if (UserManager.getInstance().getUser() == null) {
+            UserManager.getInstance().loginWithToken(this, new APICallback<>(this) {
+                @Override
+                public void call() {
+                    UserManager.getInstance().setUser(getObj());
+                }
+
+                @Override
+                public void error() {
+                    // Not logged in, so going back to login activity
+                    startActivity(new Intent(CONTEXT, AuthActivity.class));
+                    finish();
+                }
+            });
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_study, R.id.navigation_exam).build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 

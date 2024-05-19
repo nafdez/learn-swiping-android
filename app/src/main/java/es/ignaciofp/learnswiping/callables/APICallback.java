@@ -10,6 +10,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.List;
 
 import es.ignaciofp.learnswiping.R;
+import okhttp3.Callback;
 
 public abstract class APICallback<T> {
 
@@ -53,7 +54,10 @@ public abstract class APICallback<T> {
 
     public void showDialog(String title, String msg, boolean hasNegative, DialogInterface.OnClickListener onPositiveListener, DialogInterface.OnClickListener onNegativeListener) {
         ((Activity) CONTEXT).runOnUiThread(() -> {
-            MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(CONTEXT).setTitle(title).setMessage(msg).setPositiveButton(CONTEXT.getResources().getString(R.string.global_dialog_positive), onPositiveListener);
+            MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(CONTEXT)
+                    .setTitle(title)
+                    .setMessage(msg)
+                    .setPositiveButton(CONTEXT.getResources().getString(R.string.global_dialog_positive), onPositiveListener);
 
             if (hasNegative)
                 dialog.setNegativeButton(CONTEXT.getResources().getString(R.string.global_dialog_negative), onNegativeListener);

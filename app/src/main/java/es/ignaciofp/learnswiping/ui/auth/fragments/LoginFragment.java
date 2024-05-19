@@ -1,5 +1,7 @@
 package es.ignaciofp.learnswiping.ui.auth.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import es.ignaciofp.learnswiping.databinding.FragmentLoginBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.User;
 import es.ignaciofp.learnswiping.ui.auth.AuthActivity;
+import es.ignaciofp.learnswiping.ui.home.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,14 +97,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void call() {
                 showAlert(CONTEXT.getString(R.string.auth_alert_login_ok) + " " + getObj().getUsername());
-                // TODO:
-                // User manager => store token and user (cannot do it directly bc using callbacks)
-                // start MainActivity
+
+                UserManager.getInstance().storeToken(CONTEXT, getObj().getToken());
+                UserManager.getInstance().setUser(getObj());
+                startActivity(new Intent(CONTEXT, MainActivity.class));
+                ((Activity) CONTEXT).finish();
             }
 
             @Override
             public void error() {
-                showAlert("Login failed");
+                showAlert(CONTEXT.getString(R.string.global_generic_error));
             }
         };
 

@@ -25,5 +25,10 @@
 
     <string name="auth_alert_login_ok">Logging as</string>
     <string name="auth_alert_sign_up_ok">Account created successfully</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_account">Account</string>
+    <string name="acc_cnt_desc_profile_pic">profile picture</string>
+    <string name="auth_btn_logout">Log out</string>
 
 </resources>

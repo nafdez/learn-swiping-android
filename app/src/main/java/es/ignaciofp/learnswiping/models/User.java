@@ -1,17 +1,23 @@
 package es.ignaciofp.learnswiping.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
 public class User {
+
+    @SerializedName("acc_id")
     private long id;
     private String username;
     private String password;
     private String email;
     private String name;
+    @SerializedName("pic_id")
     private String picId;
     private String token;
+    @SerializedName("last_seen")
     private LocalDateTime lastSeen;
     private LocalDateTime since;
 
@@ -119,5 +125,22 @@ public class User {
 
     public void setSubscribedDecks(List<Deck> subscribedDecks) {
         this.subscribedDecks = subscribedDecks;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", picId='" + picId + '\'' +
+                ", token='" + token + '\'' +
+                ", lastSeen=" + lastSeen +
+                ", since=" + since +
+                ", ownedDecks=" + ownedDecks +
+                ", subscribedDecks=" + subscribedDecks +
+                '}';
     }
 }
