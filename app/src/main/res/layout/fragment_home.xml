@@ -1,28 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.fragments.HomeFragment"
-    android:padding="22dp">
+    tools:context=".ui.home.fragments.HomeFragment">
 
-    <Spinner
-        android:id="@+id/spnDecks"
+    <LinearLayout
+        android:id="@+id/llCurrDeck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?attr/colorPrimaryContainer"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="?attr/textAppearanceLabelLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="2dp"
+            android:text="Selected deck: アリス・イン・ワンダーランドadfjasdfjkasdfjkasfkajsd"
+            android:ellipsize="end"
+            android:maxLines="1"
+            />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtSpnDecks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Decks"
-        app:layout_constraintBottom_toTopOf="@+id/spnDecks"
-        app:layout_constraintStart_toStartOf="@+id/spnDecks" />
+        android:text="@string/home_txt_title_decks"
+        android:textAppearance="?attr/textAppearanceHeadlineLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llCurrDeck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddDeck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:contentDescription="@string/home_ctn_desc_fab_add_deck"
+        android:src="@drawable/ic_add_circle_24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

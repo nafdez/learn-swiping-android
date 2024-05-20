@@ -47,7 +47,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         txtName.setText(USER.getName());
         txtUsername.setText(USER.getUsername());
         txtEmail.setText(USER.getEmail());
-        txtSince.setText(USER.getSince().format(DateTimeFormatter.ISO_DATE).replaceAll("-", "/"));
+        txtSince.setText(String.format("Since: %s", USER.getSince().format(DateTimeFormatter.ISO_DATE).replaceAll("-", "/")));
         btnLogOut.setOnClickListener(this);
         btnLogOut.setTag("logout");
 

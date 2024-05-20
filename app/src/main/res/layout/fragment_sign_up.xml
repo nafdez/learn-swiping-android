@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/title_text"
+        style="?attr/textAppearanceDisplayMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
         android:text="@string/auth_signup_txt_account_creation"
-        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/form_layout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_text_layout"
-            style="@style/Widget.App.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -40,7 +39,7 @@
             app:errorEnabled="true"
             app:helperText="example@example.com"
             app:helperTextEnabled="true"
-            app:helperTextTextAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:helperTextTextAppearance="?attr/textAppearanceBodySmall"
             app:startIconDrawable="@drawable/ic_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +52,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtRegLayName"
-            style="@style/Widget.App.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -73,7 +71,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_text_layout"
-            style="@style/Widget.App.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -93,7 +90,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_sign_layout"
-            style="@style/Widget.App.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="password_toggle"

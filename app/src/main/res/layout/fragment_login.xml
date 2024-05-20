@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="32sp"
+        android:textAppearance="?attr/textAppearanceDisplayMedium"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@id/form_layout"
@@ -30,7 +30,6 @@
         >
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.App.TextInputLayout"
             android:id="@+id/txtLayUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +48,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.App.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="password_toggle"
