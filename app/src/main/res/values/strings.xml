@@ -31,5 +31,9 @@
     <string name="auth_btn_logout">Log out</string>
     <string name="home_txt_title_decks">Decks</string>
     <string name="home_ctn_desc_fab_add_deck">Add deck</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

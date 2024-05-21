@@ -16,7 +16,6 @@ public abstract class APICallback<T> {
 
     protected final Context CONTEXT;
     private T obj;
-    private List<T> list;
 
     public APICallback(Context CONTEXT) {
         this.CONTEXT = CONTEXT;
@@ -26,16 +25,8 @@ public abstract class APICallback<T> {
         this.obj = obj;
     }
 
-    public void setList(List<T> list) {
-        this.list = list;
-    }
-
     public T getObj() {
         return obj;
-    }
-
-    public List<T> getList() {
-        return list;
     }
 
     public abstract void call();

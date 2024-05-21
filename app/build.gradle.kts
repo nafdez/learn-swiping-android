@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.loggingInterceptor)
     implementation(libs.gson)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

@@ -11,8 +11,8 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_navigation_study"
-            app:destination="@id/navigation_study" />
+            android:id="@+id/action_navigation_home_to_deckEditorFragment"
+            app:destination="@id/deckEditorFragment" />
     </fragment>
 
     <fragment
@@ -33,4 +33,13 @@
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account"
         />
+    <fragment
+        android:id="@+id/deckEditorFragment"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.DeckEditorFragment"
+        android:label="fragment_deck_editor"
+        tools:layout="@layout/fragment_deck_editor" >
+        <action
+            android:id="@+id/action_deckEditorFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

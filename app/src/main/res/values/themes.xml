@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Theme.LearnSwiping" parent="Theme.Material3.Light.NoActionBar">
         <!--   COLORS     -->
         <item name="colorPrimary">@color/md_theme_primary</item>
@@ -178,6 +179,11 @@
     <style name="Theme.LearnSwiping.TextAppearance.Material3.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
         <item name="fontFamily">@font/noto_sans</item>
         <item name="android:fontFamily">@font/noto_sans</item>
+    </style>
+
+    <style name="ThemeOverlay.LearnSwiping.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 
 </resources>

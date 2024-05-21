@@ -6,37 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.fragments.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/llCurrDeck"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lytSelectedDeck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryContainer"
         android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/ic_deck"
+            app:tint="?attr/colorOnPrimaryContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtSelectedDeck"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!--   TODO:     -->
         <TextView
+            android:id="@+id/txtSelectedDeck"
             style="?attr/textAppearanceLabelLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="2dp"
-            android:text="Selected deck: アリス・イン・ワンダーランドadfjasdfjkasdfjkasfkajsd"
             android:ellipsize="end"
             android:maxLines="1"
-            />
+            android:text="Curso de español desde 0 to hero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--        android:text="Selected deck: アリス・イン・ワンダーランドadfjasdfjkasdfjkasfkajsd"-->
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/txtSpnDecks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_txt_title_decks"
-        android:textAppearance="?attr/textAppearanceHeadlineLarge"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llCurrDeck" />
+        app:layout_constraintTop_toBottomOf="@+id/lytSelectedDeck">
+
+        <TextView
+            android:id="@+id/txtRcrDecks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_txt_title_decks"
+            android:textAppearance="?attr/textAppearanceHeadlineLarge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SearchView
+            style="?attr/materialSearchViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:flow_horizontalBias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/txtRcrDecks"
+            app:layout_constraintTop_toTopOf="@+id/txtRcrDecks" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcrDeck"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRcrDecks" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddDeck"
@@ -48,4 +101,5 @@
         android:src="@drawable/ic_add_circle_24px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

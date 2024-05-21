@@ -12,15 +12,19 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
+import es.ignaciofp.learnswiping.models.Deck;
 import es.ignaciofp.learnswiping.models.User;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -136,6 +140,61 @@ public class UserAPIService {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
+            }
+        });
+    }
+
+    public void ownedDecks(String username, String token, APICallback<List<Deck>> callback) {
+        Request request = new Request.Builder()
+                .url(String.format("%susers/%s/decks", Constants.BASE_URL, username))
+                .addHeader("Token", token)
+                .build();
+
+        CLIENT.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (!response.isSuccessful() || response.body() == null) {
+                    callback.error();
+                    return;
+                }
+
+                Type listType = new TypeToken<List<Deck>>(){}.getType();
+                List<Deck> deckList = GSON_ACCOUNT.fromJson(response.body().string(), listType);
+                callback.setObj(deckList);
+                callback.call();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.error();
+            }
+        });
+    }
+
+    public void subscribedDecks(String username, String token, APICallback<List<Deck>> callback) {
+        Request request = new Request.Builder()
+                .url(String.format("%susers/%s/subscribed", Constants.BASE_URL, username))
+                .addHeader("Token", token)
+                .build();
+
+        CLIENT.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (!response.isSuccessful() || response.body() == null) {
+                    callback.error();
+                    return;
+                }
+                Type listType = new TypeToken<List<Deck>>(){}.getType();
+                List<Deck> deckList = GSON_ACCOUNT.fromJson(response.body().string(), listType);
+                callback.setObj(deckList);
+                callback.call();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.error();
             }
         });
     }

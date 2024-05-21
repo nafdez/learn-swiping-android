@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.util.List;
+
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
+import es.ignaciofp.learnswiping.models.Deck;
 import es.ignaciofp.learnswiping.models.User;
 import es.ignaciofp.learnswiping.service.UserAPIService;
 
@@ -62,6 +65,14 @@ public class UserManager {
 
     public void userPicture(APICallback<Bitmap> callback) {
         API_SERVICE.userPicture(user.getPicId(), callback);
+    }
+
+    public void ownedDecks(Context ctx, APICallback<List<Deck>> callback) {
+        API_SERVICE.ownedDecks(user.getUsername(), getToken(ctx), callback);
+    }
+
+    public void subscribedDecks(Context ctx, APICallback<List<Deck>> callback) {
+        API_SERVICE.subscribedDecks(user.getUsername(), getToken(ctx), callback);
     }
 
     // Doing this as a public function bc the way we handle login with callbacks
