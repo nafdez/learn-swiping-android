@@ -2,8 +2,6 @@ package es.ignaciofp.learnswiping.managers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -11,7 +9,7 @@ import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.models.Deck;
 import es.ignaciofp.learnswiping.models.User;
-import es.ignaciofp.learnswiping.service.UserAPIService;
+import es.ignaciofp.learnswiping.services.API.UserAPIService;
 
 public class UserManager {
 
@@ -78,14 +76,14 @@ public class UserManager {
     // Doing this as a public function bc the way we handle login with callbacks
     // doesn't allow to retrieve user in this class
     public void storeToken(Context ctx, String token) {
-        ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).edit().putString("token", token).apply();
+        ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).edit().putString(Constants.TOKEN_KEY, token).apply();
     }
 
     private String getToken(Context ctx) {
-        return ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).getString("token", "");
+        return ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).getString(Constants.TOKEN_KEY, "");
     }
 
     private void deleteToken(Context ctx) {
-        ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).edit().remove("token").apply();
+        ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).edit().remove(Constants.TOKEN_KEY).apply();
     }
 }

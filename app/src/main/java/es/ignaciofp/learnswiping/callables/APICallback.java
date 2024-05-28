@@ -32,6 +32,7 @@ public abstract class APICallback<T> {
     public abstract void call();
 
     public abstract void error();
+//    public abstract void error(String error);
 
     /**
      * Shows default dialog (Positive button without action, no negative button)

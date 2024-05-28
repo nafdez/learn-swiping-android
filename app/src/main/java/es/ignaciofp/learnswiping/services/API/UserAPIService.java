@@ -1,4 +1,4 @@
-package es.ignaciofp.learnswiping.service;
+package es.ignaciofp.learnswiping.services.API;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

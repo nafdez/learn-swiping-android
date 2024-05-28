@@ -1,4 +1,4 @@
-package es.ignaciofp.learnswiping.service;
+package es.ignaciofp.learnswiping.services;
 
 public class HomeService {
 

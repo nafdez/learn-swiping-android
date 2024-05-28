@@ -35,5 +35,17 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="deck_editor_txt_title">Title</string>
+    <string name="deck_editor_txt_description">Description</string>
+    <string name="deck_editor_txt_screen_title_create">Create a deck</string>
+    <string name="deck_editor_txt_screen_title_edit">Edit deck</string>
+    <string name="home_img_cnt_desc_deck_picture">Picture of the deck</string>
+    <string name="deck_editor_btn_upload_pic">Upload a pic</string>
+    <string name="deck_editor_chb_public">Make public</string>
+    <string name="deck_editor_btn_save">Save</string>
+    <string name="deck_editor_btn_back">Go back</string>
+    <string name="deck_editor_toast_image_error">There was an error while uploading the photo</string>
+    <string name="deck_editor_toast_save_error">There was an error while saving the deck</string>
+    <string name="deck_editor_toast_title_empty">There must be a title</string>
 
 </resources>

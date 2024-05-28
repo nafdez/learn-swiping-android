@@ -1,6 +1,5 @@
 package es.ignaciofp.learnswiping.ui.home.fragments;
 
-import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.adapters.AdapterDeck;
@@ -26,7 +26,7 @@ import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentHomeBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.Deck;
-import es.ignaciofp.learnswiping.service.HomeService;
+import es.ignaciofp.learnswiping.services.HomeService;
 import es.ignaciofp.learnswiping.ui.home.MainActivity;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -53,9 +53,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         lytSelectedDeck = binding.lytSelectedDeck;
         fabAddDeck = binding.fabAddDeck;
-        fabAddDeck.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_deckEditorFragment);
-        });
+        fabAddDeck.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_deckEditorFragment));
         fabAddDeck.setTag("fabAddDeck");
 
         // HomeFragment is the first fragment the user sees
@@ -66,22 +64,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (HOME_SERVICE.getWorkingDeckID() == HomeService.CLEAR_SELECTION) lytSelectedDeck.setVisibility(View.GONE);
 
-        // TODO: borrar esto
-        new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException ignored) {
-            }
-
-            ((Activity) requireContext()).runOnUiThread(() -> {
-                lytSelectedDeck.setVisibility(View.VISIBLE);
-            });
-        }).start();
-
         deckListCallback = new APICallback<>(requireContext()) {
             @Override
             public void call() {
-                deckList.addAll(getObj());
+//                deckList.addAll(getObj());
+                deckList.addAll(getObj().stream()
+                        .sorted(Comparator.comparing(Deck::getUpdatedAt).reversed())
+                        .collect(Collectors.toList()));
             }
 
             @Override
@@ -109,8 +98,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         // deckList get cleared when rotating the device, so populating again on Start
         // We're going to show both decks on this view
         UserManager.getInstance().ownedDecks(requireContext(), deckListCallback);

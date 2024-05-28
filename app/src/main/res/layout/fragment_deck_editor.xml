@@ -4,18 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".ui.home.fragments.DeckEditorFragment">
 
-    <Button
-        android:id="@+id/goBack"
+    <TextView
+        android:id="@+id/txtDeckEditorScreenTitle"
+        style="?attr/textAppearanceHeadlineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go back"
+        android:text="@string/deck_editor_txt_screen_title_create"
+        app:layout_constraintVertical_bias="0.90"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.65"
+        app:layout_constraintBottom_toTopOf="@+id/btnDeckEditorSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtEditLytDeckEditorTitle"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView3"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnDeckEditorUploadPicture"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgDeckEditorPicture"
+                    app:tint="?attr/colorOnPrimaryContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeckEditorUploadPicture"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deck_editor_btn_upload_pic"
+                app:icon="@drawable/ic_upload"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cardView3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtEditLytDeckEditorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:endIconMode="clear_text"
+            app:helperTextEnabled="true"
+            app:helperTextTextAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintBottom_toTopOf="@+id/txtEditLytDeckEditorDescription"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutImage"
+            app:startIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEditDeckEditorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/deck_editor_txt_title"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtEditLytDeckEditorDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:endIconMode="clear_text"
+            app:helperTextEnabled="true"
+            app:helperTextTextAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintBottom_toTopOf="@id/chbDeckEditorIsPublic"
+            app:layout_constraintTop_toBottomOf="@+id/txtEditLytDeckEditorTitle"
+            app:startIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEditDeckEditorDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/deck_editor_txt_description"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/chbDeckEditorIsPublic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deck_editor_chb_public"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtEditLytDeckEditorDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeckEditorSave"
+        style="?attr/materialIconButtonFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deck_editor_btn_save"
+        app:icon="@drawable/ic_save"
+        app:layout_constraintBottom_toTopOf="@+id/btnDeckEditorBack"
+        app:layout_constraintEnd_toEndOf="@+id/btnDeckEditorBack"
+        app:layout_constraintStart_toStartOf="@+id/btnDeckEditorBack" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeckEditorBack"
+        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deck_editor_btn_back"
+        app:icon="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

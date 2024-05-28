@@ -20,6 +20,8 @@ public class Deck {
     @SerializedName("created_at")
     private LocalDateTime createdAt;
 
+    public Deck() {}
+
     public Deck(int ID, int ownerID, String title, String description, String picID, boolean visible, LocalDateTime updatedAt, LocalDateTime createdAt) {
         this.ID = ID;
         this.ownerID = ownerID;
