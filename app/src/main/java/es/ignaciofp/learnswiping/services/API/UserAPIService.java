@@ -2,11 +2,6 @@ package es.ignaciofp.learnswiping.service;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -14,12 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import es.ignaciofp.learnswiping.Constants;
@@ -44,7 +36,7 @@ public class UserAPIService {
     private final String LOGIN_TOKEN = "auth/token";
     private final String LOGOUT = "auth/logout";
 
-    private final Gson GSON_ACCOUNT = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, Constants.LOCAL_DATE_TIME_JSON_DESERIALIZER).create();
+    private final Gson GSON = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, Constants.LOCAL_DATE_TIME_JSON_DESERIALIZER).create();
 
     private UserAPIService() {
         CLIENT = new OkHttpClient();
@@ -67,7 +59,7 @@ public class UserAPIService {
                     callback.error();
                     return;
                 }
-                callback.setObj(GSON_ACCOUNT.fromJson(response.body().string(), User.class));
+                callback.setObj(GSON.fromJson(response.body().string(), User.class));
                 callback.call();
             }
 
@@ -88,7 +80,7 @@ public class UserAPIService {
                     callback.error();
                     return;
                 }
-                callback.setObj(GSON_ACCOUNT.fromJson(response.body().string(), User.class));
+                callback.setObj(GSON.fromJson(response.body().string(), User.class));
                 callback.call();
             }
 
@@ -112,7 +104,7 @@ public class UserAPIService {
                     callback.error();
                     return;
                 }
-                callback.setObj(GSON_ACCOUNT.fromJson(response.body().string(), User.class));
+                callback.setObj(GSON.fromJson(response.body().string(), User.class));
                 callback.call();
             }
 
@@ -160,7 +152,7 @@ public class UserAPIService {
                 }
 
                 Type listType = new TypeToken<List<Deck>>(){}.getType();
-                List<Deck> deckList = GSON_ACCOUNT.fromJson(response.body().string(), listType);
+                List<Deck> deckList = GSON.fromJson(response.body().string(), listType);
                 callback.setObj(deckList);
                 callback.call();
             }
@@ -187,7 +179,7 @@ public class UserAPIService {
                     return;
                 }
                 Type listType = new TypeToken<List<Deck>>(){}.getType();
-                List<Deck> deckList = GSON_ACCOUNT.fromJson(response.body().string(), listType);
+                List<Deck> deckList = GSON.fromJson(response.body().string(), listType);
                 callback.setObj(deckList);
                 callback.call();
             }
