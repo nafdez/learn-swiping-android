@@ -34,6 +34,7 @@ import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.Deck;
 import es.ignaciofp.learnswiping.services.HomeService;
 import es.ignaciofp.learnswiping.ui.home.MainActivity;
+import es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -159,6 +160,10 @@ public class HomeFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menuItemDetails) {
                 // Open deck details fragment
+                Bundle bundle = new Bundle();
+                bundle.putLong(DeckDetailsFragment.ARG_DECK_ID, deckList.get(position).getID());
+                bundle.putBoolean(DeckDetailsFragment.ARG_HAS_SUBSCRIPTION, false);
+                bundle.putInt(DeckDetailsFragment.ARG_MODE, DeckDetailsFragment.MODE_SUB);
                 Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_deckDetailsFragment);
             } else if (item.getItemId() == R.id.menuItemUnsubscribe) {
                 // Unsubscribe and remove from rv if successful

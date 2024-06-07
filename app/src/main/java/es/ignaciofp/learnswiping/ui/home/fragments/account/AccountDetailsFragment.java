@@ -48,7 +48,7 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
         txtUsername = binding.txtAccUsername;
         txtEmail = binding.txtAccEmail;
         txtSince = binding.txtAccSince;
-        imgProfile = binding.imgAccProfile;
+        imgProfile = binding.imgDeckImgDetails;
         btnLogOut = binding.btnLogOut;
 
         return binding.getRoot();

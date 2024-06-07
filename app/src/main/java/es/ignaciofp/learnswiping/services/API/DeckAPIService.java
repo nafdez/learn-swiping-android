@@ -174,15 +174,36 @@ public class DeckAPIService extends APIService {
         });
     }
 
+    private void deckDetailsOwner(String token, String username, String deckID, APICallback<Deck> callback) {
+        HTTP_CLIENT.newCall(makeRequest(String.format("subs/%s/%s", username, deckID), token, "", "")).enqueue(new Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (!response.isSuccessful() || response.body() == null) {
+                    callback.error();
+                    return;
+                }
+                // Deck details
+//                callback.setObj(BitmapFactory.decodeStream(response.body().byteStream()));
+                callback.call();
+            }
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+        });
+    }
+
+    private void deck
+
     private void rateDeck(String token, String deckID, int rating, APICallback<Void> callback) {
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create("", mediaType);
-        Request request = new Request.Builder()
-                .url(String.format("%sdecks/%s/rating/%s", Constants.BASE_URL, deckID, rating))
-                .method("GET", body)
-                .addHeader("Token", token)
-                .build();
-        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
+//        MediaType mediaType = MediaType.parse("text/plain");
+//        RequestBody body = RequestBody.create("", mediaType);
+//        Request request = new Request.Builder()
+//                .url(String.format("%sdecks/%s/rating/%s", Constants.BASE_URL, deckID, rating))
+//                .method("GET", body)
+//                .addHeader("Token", token)
+//                .build();
+        HTTP_CLIENT.newCall(makeRequest(String.format("%s/rating/%s", deckID, rating), token, "text/plain", "")).enqueue(new Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.isSuccessful()) callback.call();
@@ -193,6 +214,16 @@ public class DeckAPIService extends APIService {
                 callback.error();
             }
         });
+    }
+
+    private Request makeRequest(String endpoint, String token, String mediaTypeStr, String bodyStr) {
+        MediaType mediaType = MediaType.parse(mediaTypeStr);
+        RequestBody body = RequestBody.create(bodyStr, mediaType);
+        return new Request.Builder()
+                .url(String.format("%sdecks/%s", Constants.BASE_URL, endpoint))
+                .method("GET", body)
+                .addHeader("Token", token)
+                .build();
     }
 
     private void deckRating(String deckID, APICallback<Rating> callback) {

@@ -31,11 +31,17 @@ public class DeckDetailsFragment extends Fragment {
 
     private FragmentDeckDetailsBinding binding;
 
-    private static final String ARG_DECK_ID = "DECK_ID";
-    private static final String ARG_HAS_SUBSCRIPTION = "HAS_SUBSCRIPTION";
+    public static final int MODE_OWNER = 0;
+    public static final int MODE_SHOP = 1;
+    public static final int MODE_SUB = 2;
 
-    private String deckId;
+    public static final String ARG_DECK_ID = "DECK_ID";
+    public static final String ARG_HAS_SUBSCRIPTION = "HAS_SUBSCRIPTION";
+    public static final String ARG_MODE = "MODE";
+
+    private Long deckId;
     private boolean hasSubscription;
+    private int mode;
 
     private Deck deck;
 
@@ -55,15 +61,16 @@ public class DeckDetailsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param deck_id Parameter 1.
+     * @param deckID Parameter 1.
      * @return A new instance of fragment DeckDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DeckDetailsFragment newInstance(String deck_id, boolean hasSubscription) {
+    public static DeckDetailsFragment newInstance(long deckID, boolean hasSubscription, int mode) {
         DeckDetailsFragment fragment = new DeckDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_DECK_ID, deck_id);
+        args.putLong(ARG_DECK_ID, deckID);
         args.putBoolean(ARG_HAS_SUBSCRIPTION, hasSubscription);
+        args.putInt(ARG_MODE, mode);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,8 +79,9 @@ public class DeckDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            deckId = getArguments().getString(ARG_DECK_ID);
+            deckId = getArguments().getLong(ARG_DECK_ID);
             hasSubscription = getArguments().getBoolean(ARG_HAS_SUBSCRIPTION);
+            mode = getArguments().getInt(ARG_MODE);
         }
     }
 
@@ -97,12 +105,13 @@ public class DeckDetailsFragment extends Fragment {
 
         DECK_MANAGER = DeckManager.getInstance();
 
-        if (deck.getOwnerID() == UserManager.getInstance().getUser().getId()) {
-            // Is Owner
-        } else {
-            // It isn't
-        }
+//        switch (mode) {
+//            case MODE_OWNER -> ;
+//            case MODE_SHOP -> ;
+//            case MODE_SUB -> ;
+//        }
 
         toolbar.setNavigationOnClickListener((v) -> Navigation.findNavController(v).popBackStack());
+
     }
 }

@@ -28,6 +28,7 @@ import es.ignaciofp.learnswiping.databinding.FragmentOwnedDecksBinding;
 import es.ignaciofp.learnswiping.managers.DeckManager;
 import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment;
 
 public class OwnedDecksFragment extends Fragment {
 
@@ -89,6 +90,10 @@ public class OwnedDecksFragment extends Fragment {
 
     private void onRvItemClick(int position) {
         // Probably moving open details here
+        Bundle bundle = new Bundle();
+        bundle.putLong(DeckDetailsFragment.ARG_DECK_ID, deckList.get(position).getID());
+        bundle.putBoolean(DeckDetailsFragment.ARG_HAS_SUBSCRIPTION, false);
+        bundle.putInt(DeckDetailsFragment.ARG_MODE, DeckDetailsFragment.MODE_OWNER);
         Navigation.findNavController(requireView()).navigate(R.id.action_navigation_account_to_deckDetailsFragment);
     }
 
