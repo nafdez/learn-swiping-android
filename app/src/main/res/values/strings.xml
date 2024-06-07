@@ -40,6 +40,8 @@
     <string name="deck_editor_txt_screen_title_create">Create a deck</string>
     <string name="deck_editor_txt_screen_title_edit">Edit deck</string>
     <string name="home_img_cnt_desc_deck_picture">Picture of the deck</string>
+    <string name="home_toast_unsubscribe_error">Unable to unsubscribe from</string>
+    <string name="home_toast_subscribe_error">Unable to subscribe to</string>
     <string name="deck_editor_btn_upload_pic">Upload a pic</string>
     <string name="deck_editor_chb_public">Make public</string>
     <string name="deck_editor_btn_save">Save</string>
@@ -47,5 +49,18 @@
     <string name="deck_editor_toast_image_error">There was an error while uploading the photo</string>
     <string name="deck_editor_toast_save_error">There was an error while saving the deck</string>
     <string name="deck_editor_toast_title_empty">There must be a title</string>
+    <string name="owned_decks_toast_subscribe_error">Unable to subscribe to</string>
+    <string name="owned_decks_toast_delete_error">Unable to delete</string>
+    <string name="menu_item_deck_subscribe">Subscribe</string>
+    <string name="menu_item_deck_unsubscribe">Unsubscribe</string>
+    <string name="menu_item_deck_delete">Delete</string>
+    <string name="menu_item_deck_select">Select</string>
+    <string name="menu_item_deck_details">Details</string>
+    <string name="account_tab_item_account">Account</string>
+    <string name="account_tab_item_stats">Stats</string>
+    <string name="account_tab_item_decks">Decks</string>
+    <string name="account_txt_title_stats">Stats</string>
+    <string name="deck_details_btn_subscribe">Subscribe</string>
+    <string name="deck_details_btn_unsubscribe">Unsubscribe</string>
 
 </resources>

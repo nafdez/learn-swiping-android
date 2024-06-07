@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".ui.home.fragments.DeckEditorFragment">
+    tools:context=".ui.home.fragments.deck.DeckCreatorFragment">
 
     <TextView
         android:id="@+id/txtDeckEditorScreenTitle"
@@ -53,7 +53,7 @@
                     app:tint="?attr/colorOnPrimaryContainer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
 
             </com.google.android.material.card.MaterialCardView>
 

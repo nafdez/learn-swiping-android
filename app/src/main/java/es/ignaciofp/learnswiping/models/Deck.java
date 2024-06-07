@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 public class Deck {
 
     @SerializedName("deck_id")
-    private int ID;
+    private long ID;
     @SerializedName("owner")
-    private int ownerID;
+    private long ownerID;
     private String title;
     private String description;
     @SerializedName("pic_id")
@@ -22,7 +22,7 @@ public class Deck {
 
     public Deck() {}
 
-    public Deck(int ID, int ownerID, String title, String description, String picID, boolean visible, LocalDateTime updatedAt, LocalDateTime createdAt) {
+    public Deck(long ID, long ownerID, String title, String description, String picID, boolean visible, LocalDateTime updatedAt, LocalDateTime createdAt) {
         this.ID = ID;
         this.ownerID = ownerID;
         this.title = title;
@@ -33,19 +33,19 @@ public class Deck {
         this.createdAt = createdAt;
     }
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
-    public int getOwnerID() {
+    public long getOwnerID() {
         return ownerID;
     }
 
-    public void setOwnerID(int ownerID) {
+    public void setOwnerID(long ownerID) {
         this.ownerID = ownerID;
     }
 

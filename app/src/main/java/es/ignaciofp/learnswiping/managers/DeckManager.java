@@ -29,7 +29,8 @@ public class DeckManager {
         API_SERVICE.create(getToken(ctx), deck, new APICallback<>(ctx) {
             @Override
             public void call() {
-                API_SERVICE.setDeckImage(getToken(ctx), getObj().getID(), img, imgCallback);
+                if (img != null)
+                    API_SERVICE.setDeckImage(getToken(ctx), getObj().getID(), img, imgCallback);
                 callback.setObj(getObj());
                 callback.call();
             }
@@ -41,8 +42,20 @@ public class DeckManager {
         });
     }
 
+    public void delete(Context ctx, long deckID, APICallback<Void> callback) {
+        API_SERVICE.delete(getToken(ctx), deckID, callback);
+    }
+
     public void deckPicture(String picID, APICallback<Bitmap> callback) {
         API_SERVICE.deckPicture(picID, callback);
+    }
+
+    public void addDeckSubscription(Context ctx, long deckID, APICallback<Void> callback) {
+        API_SERVICE.addDeckSubscription(getToken(ctx), deckID, callback);
+    }
+
+    public void removeDeckSubscription(Context ctx, long deckID, APICallback<Void> callback) {
+        API_SERVICE.removeDeckSubscription(getToken(ctx), deckID, callback);
     }
 
     private String getToken(Context ctx) {

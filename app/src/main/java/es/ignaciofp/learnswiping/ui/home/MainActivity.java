@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Opens a fragment that uses all screen and hiding other UI elements
     // Don't be confused with full screen fragments
-    public void openFormFragment(Fragment fragment) {
+    public void openFormFragment() {
 //        getSupportFragmentManager().beginTransaction()
 //                .add(R.id.frmCntWholeActivityScreen, fragment)
 //                .commit();

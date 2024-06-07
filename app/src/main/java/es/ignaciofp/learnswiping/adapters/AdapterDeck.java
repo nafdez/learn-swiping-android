@@ -20,16 +20,28 @@ import es.ignaciofp.learnswiping.models.Deck;
 
 public class AdapterDeck extends RecyclerView.Adapter<AdapterDeck.ViewHolderDeck> {
 
-    final List<Deck> deckList;
+    public interface OnItemClickListener {
+        void onItemClicked(int position);
+    }
 
-    public AdapterDeck(List<Deck> deckList) {
+    public interface PopupMenuOnClickListener {
+        void onPopupMenuClicked(int position);
+    }
+
+    final List<Deck> deckList;
+    final OnItemClickListener onItemClickListener;
+    final PopupMenuOnClickListener popupMenuOnClickListener;
+
+    public AdapterDeck(List<Deck> deckList, OnItemClickListener onItemClickListener, PopupMenuOnClickListener popupMenuOnClickListener) {
         this.deckList = deckList;
+        this.onItemClickListener = onItemClickListener;
+        this.popupMenuOnClickListener = popupMenuOnClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolderDeck onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolderDeck(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deck, parent, false));
+        return new ViewHolderDeck(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deck, parent, false), onItemClickListener, popupMenuOnClickListener);
     }
 
     @Override
@@ -42,19 +54,28 @@ public class AdapterDeck extends RecyclerView.Adapter<AdapterDeck.ViewHolderDeck
         return deckList.size();
     }
 
-    public class ViewHolderDeck extends RecyclerView.ViewHolder {
+    public static class ViewHolderDeck extends RecyclerView.ViewHolder {
 
         final View VIEW;
         final TextView title;
         final TextView description;
         final ImageView image;
 
-        public ViewHolderDeck(@NonNull View itemView) {
+        public ViewHolderDeck(@NonNull View itemView, OnItemClickListener onItemClickListener, PopupMenuOnClickListener popupMenuOnClickListener) {
             super(itemView);
             VIEW = itemView;
             title = itemView.findViewById(R.id.txtDeckTitle);
             description = itemView.findViewById(R.id.txtDeckDesc);
             image = itemView.findViewById(R.id.imgDeckPic);
+
+            // TODO: Select deck when simple touch
+            itemView.setOnClickListener(v -> onItemClickListener.onItemClicked(getAdapterPosition()));
+
+            // TODO: menu actions
+            itemView.setOnLongClickListener(v -> {
+                popupMenuOnClickListener.onPopupMenuClicked(getAdapterPosition());
+                return false;
+            });
         }
 
         public void bind(@NonNull Deck deck) {

@@ -33,7 +33,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <!--   TODO:     -->
         <TextView
             android:id="@+id/txtSelectedDeck"
             style="?attr/textAppearanceLabelLarge"
@@ -41,13 +40,11 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Curso de español desde 0 to hero"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
-        <!--        android:text="Selected deck: アリス・イン・ワンダーランドadfjasdfjkasdfjkasfkajsd"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -70,18 +67,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <SearchView
-            style="?attr/materialSearchViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:flow_horizontalBias="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toEndOf="@+id/txtRcrDecks"
-            app:layout_constraintTop_toTopOf="@+id/txtRcrDecks" />
+<!--        <SearchView-->
+<!--            style="?attr/materialSearchViewStyle"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:flow_horizontalBias="1"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/txtRcrDecks"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/txtRcrDecks" />-->
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcrDeck"
+            android:id="@+id/rvSubDecks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"

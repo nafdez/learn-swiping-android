@@ -1,8 +1,14 @@
-package es.ignaciofp.learnswiping.ui.home.fragments;
+package es.ignaciofp.learnswiping.ui.home.fragments.account;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,37 +16,47 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.fragment.app.Fragment;
-
 import java.time.format.DateTimeFormatter;
 
 import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.callables.APICallback;
-import es.ignaciofp.learnswiping.databinding.FragmentAccountBinding;
+import es.ignaciofp.learnswiping.databinding.FragmentAccountDetailsBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.User;
 import es.ignaciofp.learnswiping.ui.auth.AuthActivity;
 
-public class AccountFragment extends Fragment implements View.OnClickListener {
-
-    private FragmentAccountBinding binding;
+public class AccountDetailsFragment extends Fragment implements View.OnClickListener{
 
     private final UserManager USER_MANAGER = UserManager.getInstance();
     private final User USER = USER_MANAGER.getUser();
 
+    private FragmentAccountDetailsBinding binding;
+
+    private TextView txtName;
+    private TextView txtUsername;
+    private TextView txtEmail;
+    private TextView txtSince;
+    private ImageView imgProfile;
+    private Button btnLogOut;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentAccountBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        binding = FragmentAccountDetailsBinding.inflate(inflater, container, false);
 
-        TextView txtName = binding.txtAccName;
-        TextView txtUsername = binding.txtAccUsername;
-        TextView txtEmail = binding.txtAccEmail;
-        TextView txtSince = binding.txtAccSince;
-        ImageView imgProfile = binding.imgAccProfile;
-        Button btnLogOut = binding.btnLogOut;
+        txtName = binding.txtAccName;
+        txtUsername = binding.txtAccUsername;
+        txtEmail = binding.txtAccEmail;
+        txtSince = binding.txtAccSince;
+        imgProfile = binding.imgAccProfile;
+        btnLogOut = binding.btnLogOut;
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         txtName.setText(USER.getName());
         txtUsername.setText(USER.getUsername());
@@ -64,13 +80,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 });
             }
         });
-
-        return root;
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         binding = null;
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuItemDetails"
+        android:title="@string/menu_item_deck_details"/>
+    <item
+        android:id="@+id/menuItemSelectDeck"
+        android:title="@string/menu_item_deck_select" />
+    <item
+        android:id="@+id/menuItemSubscribe"
+        android:title="@string/menu_item_deck_subscribe" />
+    <item
+        android:id="@+id/menuItemUnsubscribe"
+        android:title="@string/menu_item_deck_unsubscribe" />
+    <item
+        android:id="@+id/menuItemDelete"
+        android:title="@string/menu_item_deck_delete" />
+</menu>

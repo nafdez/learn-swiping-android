@@ -1,15 +1,15 @@
 package es.ignaciofp.learnswiping.services;
 
+import es.ignaciofp.learnswiping.models.Deck;
+
 public class HomeService {
 
     private static HomeService instance;
 
-    private int workingDeckID;
-
-    public static final int CLEAR_SELECTION = -1;
+    private Deck workingDeck;
 
     private HomeService() {
-        workingDeckID = CLEAR_SELECTION; // Default for not
+        workingDeck = null; // Default for not
     }
 
     public static HomeService getInstance() {
@@ -17,11 +17,11 @@ public class HomeService {
         return instance;
     }
 
-    public int getWorkingDeckID() {
-        return workingDeckID;
+    public Deck getWorkingDeck() {
+        return workingDeck;
     }
 
-    public void setWorkingDeckID(int workingDeckID) {
-        this.workingDeckID = workingDeckID;
+    public void setWorkingDeck(Deck workingDeck) {
+        this.workingDeck = workingDeck;
     }
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.fragments.deck.DeckDetailsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tlbDeckDetails"
+            style="@style/Widget.Material3.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorSurface"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:menu="@menu/menu_toolbar_deck"
+            app:title="Deck"
+            app:titleTextColor="?attr/colorOnSurface"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:background="?attr/colorSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/crdImgAccContainer"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:elevation="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgDeckImgDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/acc_cnt_desc_profile_pic"
+                android:scaleType="centerCrop" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDeckTitleDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:ellipsize="end"
+            android:maxLines="2"
+
+            android:text="INTRODUCTION TO SPANISH GRAMMAR II TEXTO BIEN LARGO Y PERRÓN"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+
+            app:layout_constraintBottom_toTopOf="@+id/txtDeckDescriptionDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/crdImgAccContainer"
+            app:layout_constraintTop_toTopOf="@id/crdImgAccContainer" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDeckDescriptionDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:ellipsize="end"
+            android:maxLines="5"
+
+            android:text="Spanish grammar for dummies. Learn various spanish topics along it's grammar rules in a very funny way! Testing the longiness of thy text, abcdefghijklmnopqrstuv"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+
+            app:layout_constraintBottom_toBottomOf="@id/crdImgAccContainer"
+            app:layout_constraintEnd_toEndOf="@id/txtDeckTitleDetails"
+            app:layout_constraintStart_toStartOf="@+id/txtDeckTitleDetails"
+            app:layout_constraintTop_toBottomOf="@+id/txtDeckTitleDetails" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtRatingDeckDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+
+            android:text="4/5"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+
+            android:drawableStart="@drawable/ic_star_half_filled"
+            android:drawableTint="?attr/colorOnSurface"
+            android:drawablePadding="4dp"
+
+            app:layout_constraintStart_toStartOf="@+id/crdImgAccContainer"
+            app:layout_constraintTop_toBottomOf="@+id/crdImgAccContainer" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubscriptionDeckDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deck_details_btn_subscribe"
+            app:layout_constraintBottom_toBottomOf="@+id/txtRatingDeckDetails"
+            app:layout_constraintEnd_toEndOf="@+id/txtDeckDescriptionDetails"
+            app:layout_constraintHorizontal_bias="0.90"
+            app:layout_constraintStart_toEndOf="@+id/txtRatingDeckDetails"
+            app:layout_constraintTop_toTopOf="@+id/txtRatingDeckDetails" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDeckDetails"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRatingDeckDetails" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

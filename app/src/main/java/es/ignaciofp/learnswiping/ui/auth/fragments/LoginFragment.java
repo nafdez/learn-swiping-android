@@ -129,7 +129,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 UserManager.getInstance().login(user, loginCallback);
                 break;
             case "signUpButton":
-                Log.d("PEPELUI", "spsdf");
                 String usernme = txtEditUsername.getText().toString().replaceAll("\\s+", "");
                 String passwd = txtEditPassword.getText().toString().trim();
                 authActivity.changeFragment(new SignUpFragment(), usernme, passwd);

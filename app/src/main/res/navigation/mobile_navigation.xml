@@ -11,8 +11,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_deckEditorFragment"
+            android:id="@+id/action_navigation_home_to_deckCreatorFragment"
             app:destination="@id/deckEditorFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_deckDetailsFragment"
+            app:destination="@id/deckDetailsFragment" />
     </fragment>
 
     <fragment
@@ -29,17 +32,26 @@
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="es.ignaciofp.learnswiping.ui.home.fragments.AccountFragment"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account"
-        />
+        >
+        <action
+            android:id="@+id/action_navigation_account_to_deckDetailsFragment"
+            app:destination="@id/deckDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deckEditorFragment"
-        android:name="es.ignaciofp.learnswiping.ui.home.fragments.DeckEditorFragment"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckCreatorFragment"
         android:label="fragment_deck_editor"
-        tools:layout="@layout/fragment_deck_editor" >
+        tools:layout="@layout/fragment_deck_creator" >
         <action
             android:id="@+id/action_deckEditorFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/deckDetailsFragment"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment"
+        android:label="fragment_deck_details"
+        tools:layout="@layout/fragment_deck_details" />
 </navigation>

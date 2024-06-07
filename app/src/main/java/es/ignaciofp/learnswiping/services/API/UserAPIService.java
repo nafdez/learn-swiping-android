@@ -21,25 +21,22 @@ import es.ignaciofp.learnswiping.models.User;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class UserAPIService {
+public class UserAPIService extends APIService {
 
     private static UserAPIService instance;
-    private final OkHttpClient CLIENT;
 
     private final String REGISTER = "auth/register";
     private final String LOGIN = "auth/login";
     private final String LOGIN_TOKEN = "auth/token";
     private final String LOGOUT = "auth/logout";
 
-    private final Gson GSON = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, Constants.LOCAL_DATE_TIME_JSON_DESERIALIZER).create();
+    private final Gson GSON = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, LOCAL_DATE_TIME_JSON_DESERIALIZER).create();
 
     private UserAPIService() {
-        CLIENT = new OkHttpClient();
     }
 
     public static UserAPIService getInstance() {
@@ -52,7 +49,7 @@ public class UserAPIService {
 
         // Maybe APICallback should implement Callback class and reduce a lot of code
         // but this way we do not have to parse json on other classes when instantiating APICallback
-        CLIENT.newCall(makeJSONRequest(REGISTER, json)).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(makeJSONRequest(REGISTER, json)).enqueue(new Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
@@ -73,7 +70,7 @@ public class UserAPIService {
     public void login(User user, APICallback<User> callback) {
         String json = String.format("{\"username\":\"%s\",\"password\":\"%s\"}", user.getUsername(), user.getPassword());
 
-        CLIENT.newCall(makeJSONRequest(LOGIN, json)).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(makeJSONRequest(LOGIN, json)).enqueue(new Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
@@ -97,7 +94,7 @@ public class UserAPIService {
                 .addHeader("Token", token)
                 .build();
 
-        CLIENT.newCall(request).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
@@ -125,7 +122,7 @@ public class UserAPIService {
         // We don't give a fuck if successful or not. The API just updates the token to ensure
         // that nobody has access to the account. But we also delete the token here so shouldn't
         // really be a problem
-        CLIENT.newCall(request).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
             }
@@ -142,7 +139,7 @@ public class UserAPIService {
                 .addHeader("Token", token)
                 .build();
 
-        CLIENT.newCall(request).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
@@ -170,7 +167,7 @@ public class UserAPIService {
                 .addHeader("Token", token)
                 .build();
 
-        CLIENT.newCall(request).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
@@ -195,9 +192,9 @@ public class UserAPIService {
         Request request = new Request.Builder()
                 .url(String.format("%s%s/%s", Constants.BASE_URL, Constants.PICTURE_ENDPOINT, picID)).build();
 
-        CLIENT.newCall(request).enqueue(new Callback() {
+        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (!response.isSuccessful() || response.body() == null) {
                     callback.error();
                     return;
