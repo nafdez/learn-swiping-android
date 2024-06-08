@@ -93,9 +93,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         txtEditUsername.setText(username);
         txtEditPassword.setText(password);
 
-        signUpCallback = new APICallback<User>(requireContext()) {
+        signUpCallback = new APICallback<>(requireContext(), User.class) {
             @Override
-            public void call() {
+            public void call(User user) {
                 showAlert(CONTEXT.getString(R.string.auth_alert_sign_up_ok));
                 goToLoginFragment();
             }

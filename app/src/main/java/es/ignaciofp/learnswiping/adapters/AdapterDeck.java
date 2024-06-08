@@ -1,6 +1,7 @@
 package es.ignaciofp.learnswiping.adapters;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,11 +92,11 @@ public class AdapterDeck extends RecyclerView.Adapter<AdapterDeck.ViewHolderDeck
                 return;
             }
 
-            DeckManager.getInstance().deckPicture(deck.getPicID(), new APICallback<>(VIEW.getContext()) {
+            DeckManager.getInstance().deckPicture(deck.getPicID(), new APICallback<>(VIEW.getContext(), Bitmap.class) {
                 @Override
-                public void call() {
+                public void call(Bitmap bitmap) {
                     ((Activity) VIEW.getContext()).runOnUiThread(() -> {
-                        image.setImageBitmap(getObj());
+                        image.setImageBitmap(bitmap);
                     });
                 }
 

@@ -93,13 +93,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         txtEditUsername.setText(username);
         txtEditPassword.setText(password);
 
-        loginCallback = new APICallback<User>(requireContext()) {
+        loginCallback = new APICallback<User>(requireContext(), User.class) {
             @Override
-            public void call() {
-                showAlert(CONTEXT.getString(R.string.auth_alert_login_ok) + " " + getObj().getUsername());
+            public void call(User user) {
+                showAlert(CONTEXT.getString(R.string.auth_alert_login_ok) + " " + user.getUsername());
 
-                UserManager.getInstance().storeToken(CONTEXT, getObj().getToken());
-                UserManager.getInstance().setUser(getObj());
+                UserManager.getInstance().storeToken(CONTEXT, user.getToken());
+                UserManager.getInstance().setUser(user);
                 startActivity(new Intent(CONTEXT, MainActivity.class));
                 ((Activity) CONTEXT).finish();
             }

@@ -135,9 +135,9 @@ public class DeckCreatorFragment extends Fragment implements View.OnClickListene
             return;
         }
 
-        APICallback<Deck> deckCallback = new APICallback<>(requireContext()) {
+        APICallback<Deck> deckCallback = new APICallback<>(requireContext(), Deck.class) {
             @Override
-            public void call() {
+            public void call(Deck deck) {
                 ((Activity) CONTEXT).runOnUiThread(() -> {
                     Navigation.findNavController(requireView()).navigate(R.id.action_deckEditorFragment_to_navigation_home);
                 });
@@ -151,9 +151,9 @@ public class DeckCreatorFragment extends Fragment implements View.OnClickListene
             }
         };
 
-        APICallback<Bitmap> imgCallback = new APICallback<>(requireContext()) {
+        APICallback<Bitmap> imgCallback = new APICallback<>(requireContext(), Bitmap.class) {
             @Override
-            public void call() {
+            public void call(Bitmap bitmap) {
             }
 
             @Override

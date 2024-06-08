@@ -26,13 +26,13 @@ public class DeckManager {
     // TODO: fix this shit
     public void create(Context ctx, Deck deck, Bitmap img, APICallback<Deck> callback, APICallback<Bitmap> imgCallback) {
         // This is ugly af. Next time sure I'm going to plan things before haha
-        API_SERVICE.create(getToken(ctx), deck, new APICallback<>(ctx) {
+        API_SERVICE.create(getToken(ctx), deck, new APICallback<>(ctx, Deck.class) {
             @Override
-            public void call() {
+            public void call(Deck deck) {
                 if (img != null)
                     API_SERVICE.setDeckImage(getToken(ctx), getObj().getID(), img, imgCallback);
-                callback.setObj(getObj());
-                callback.call();
+                callback.setObj(deck);
+                callback.call(deck);
             }
 
             @Override

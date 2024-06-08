@@ -17,6 +17,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -65,10 +67,10 @@ public class OwnedDecksFragment extends Fragment {
         });
 
         deckList = new ArrayList<>();
-        deckListCallback = new APICallback<>(requireContext()) {
+        deckListCallback = new APICallback<>(requireContext(), (Class<List<Deck>>)(Object)List.class, Deck.class) {
             @Override
-            public void call() {
-                getObj().stream()
+            public void call(List<Deck> decks) {
+                decks.stream()
                         .sorted(Comparator.comparing(Deck::getUpdatedAt).reversed())
                         .forEachOrdered(deckList::add);
 
@@ -117,9 +119,9 @@ public class OwnedDecksFragment extends Fragment {
                         .addDeckSubscription(
                                 requireContext(),
                                 deckList.get(position).getID(),
-                                new APICallback<>(requireContext()) {
+                                new APICallback<>(requireContext(), Void.class) {
                                     @Override
-                                    public void call() {
+                                    public void call(Void obj) {
                                     }
 
                                     @Override
@@ -132,9 +134,9 @@ public class OwnedDecksFragment extends Fragment {
             } else if(item.getItemId() == R.id.menuItemDelete) {
                 DeckManager.getInstance().delete(requireContext(),
                         deckList.get(position).getID(),
-                        new APICallback<>(requireContext()) {
+                        new APICallback<>(requireContext(), Void.class) {
                             @Override
-                            public void call() {
+                            public void call(Void obj) {
                                 deckList.remove(position);
                                 requireActivity().runOnUiThread(() -> {
                                     adapterDeck.notifyItemRemoved(position);

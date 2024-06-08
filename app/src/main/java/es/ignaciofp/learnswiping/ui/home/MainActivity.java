@@ -18,6 +18,7 @@ import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.ActivityMainBinding;
 import es.ignaciofp.learnswiping.managers.UserManager;
+import es.ignaciofp.learnswiping.models.User;
 import es.ignaciofp.learnswiping.ui.auth.AuthActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         // If rejected, then go to auth activity
         // TODO: login with token fails
         if (UserManager.getInstance().getUser() == null) {
-            UserManager.getInstance().loginWithToken(this, new APICallback<>(this) {
+            UserManager.getInstance().loginWithToken(this, new APICallback<>(this, User.class) {
                 @Override
-                public void call() {
-                    UserManager.getInstance().setUser(getObj());
+                public void call(User user) {
+                    UserManager.getInstance().setUser(user);
                 }
 
                 @Override

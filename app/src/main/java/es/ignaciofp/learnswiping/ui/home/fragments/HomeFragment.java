@@ -3,6 +3,7 @@ package es.ignaciofp.learnswiping.ui.home.fragments;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,10 +99,13 @@ public class HomeFragment extends Fragment {
         });
 
         deckList = new ArrayList<>();
-        deckListCallback = new APICallback<>(requireContext()) {
+        deckListCallback = new APICallback<>(requireContext(), (Class<List<Deck>>)(Object)List.class, Deck.class) {
             @Override
-            public void call() {
-                getObj().stream()
+            public void call(List<Deck> decks) {
+                for (Deck deck : decks) {
+                    Log.d("PRUEAS", deck.toString());
+                }
+                decks.stream()
                         .sorted(Comparator.comparing(Deck::getUpdatedAt).reversed())
                         .forEachOrdered(deckList::add);
 
@@ -171,9 +175,9 @@ public class HomeFragment extends Fragment {
                         .removeDeckSubscription(
                                 requireContext(),
                                 deckList.get(position).getID(),
-                                new APICallback<>(requireContext()) {
+                                new APICallback<>(requireContext(), Void.class) {
                                     @Override
-                                    public void call() {
+                                    public void call(Void obj) {
                                         deckList.remove(position);
                                         requireActivity().runOnUiThread(() -> {
                                            adapterDeck.notifyItemRemoved(position);

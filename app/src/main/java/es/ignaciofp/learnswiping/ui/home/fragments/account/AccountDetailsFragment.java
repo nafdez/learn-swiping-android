@@ -2,6 +2,7 @@ package es.ignaciofp.learnswiping.ui.home.fragments.account;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -65,11 +66,11 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
         btnLogOut.setOnClickListener(this);
         btnLogOut.setTag("logout");
 
-        USER_MANAGER.userPicture(new APICallback<>(requireContext()) {
+        USER_MANAGER.userPicture(new APICallback<>(requireContext(), Bitmap.class) {
             @Override
-            public void call() {
+            public void call(Bitmap bitmap) {
                 ((Activity) CONTEXT).runOnUiThread(() ->{
-                    imgProfile.setImageBitmap(getObj());
+                    imgProfile.setImageBitmap(bitmap);
                 });
             }
 
