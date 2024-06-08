@@ -100,7 +100,7 @@ public class AdapterDeck extends RecyclerView.Adapter<AdapterDeck.ViewHolderDeck
                 }
 
                 @Override
-                public void error() {
+                public void error(String error) {
                     ((Activity) VIEW.getContext()).runOnUiThread(() -> {
                         image.setImageDrawable(AppCompatResources.getDrawable(VIEW.getContext(), R.drawable.ic_deck_default));
                     });

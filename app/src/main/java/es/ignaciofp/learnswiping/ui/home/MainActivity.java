@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void error() {
+                public void error(String error) {
                     // Not logged in, so going back to login activity
                     startActivity(new Intent(CONTEXT, AuthActivity.class));
                     finish();

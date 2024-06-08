@@ -47,7 +47,7 @@ public class UserManager {
     public void loginWithToken(Context ctx, APICallback<User> callback) {
         String token = getToken(ctx);
         if (token.isEmpty()) {
-            callback.error();
+            callback.error("no token");
             return;
         }
         API_SERVICE.loginWithToken(getToken(ctx), callback);

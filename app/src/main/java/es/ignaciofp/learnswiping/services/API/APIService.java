@@ -17,4 +17,13 @@ public abstract class APIService {
 
     // Since LocalDateTime is going to be used in manu places, it's the default
     protected static final Gson BASIC_GSON = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, LOCAL_DATE_TIME_JSON_DESERIALIZER).create();
+
+    protected final String TEXT_PLAIN = "text/plain";
+    protected final String APPLICATION_JSON = "application/json";
+    protected final String IMAGE_PNG = "image/png";
+
+    protected final String METHOD_GET = "GET";
+    protected final String METHOD_POST = "POST";
+    protected final String METHOD_PUT = "PUT";
+    protected final String METHOD_DELETE = "DELETE";
 }

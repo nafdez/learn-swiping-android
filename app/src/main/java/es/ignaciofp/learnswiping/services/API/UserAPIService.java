@@ -53,7 +53,7 @@ public class UserAPIService extends APIService {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
-                    callback.error();
+                    callback.error(String.valueOf(response.code()));
                     return;
                 }
                 callback.setObj(GSON.fromJson(response.body().string(), User.class));
@@ -62,7 +62,7 @@ public class UserAPIService extends APIService {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.error();
+                callback.error(e.getMessage());
             }
         });
     }
@@ -74,7 +74,7 @@ public class UserAPIService extends APIService {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
-                    callback.error();
+                    callback.error(String.valueOf(response.code()));
                     return;
                 }
                 callback.setObj(GSON.fromJson(response.body().string(), User.class));
@@ -83,7 +83,7 @@ public class UserAPIService extends APIService {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.error();
+                callback.error(e.getMessage());
             }
         });
     }
@@ -98,7 +98,7 @@ public class UserAPIService extends APIService {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
-                    callback.error();
+                    callback.error(String.valueOf(response.code()));
                     return;
                 }
                 callback.setObj(GSON.fromJson(response.body().string(), User.class));
@@ -107,7 +107,7 @@ public class UserAPIService extends APIService {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.error();
+                callback.error(e.getMessage());
             }
         });
     }
@@ -144,7 +144,7 @@ public class UserAPIService extends APIService {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
-                    callback.error();
+                    callback.error(String.valueOf(response.code()));
                     return;
                 }
 
@@ -156,7 +156,7 @@ public class UserAPIService extends APIService {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.error();
+                callback.error(e.getMessage());
             }
         });
     }
@@ -172,7 +172,7 @@ public class UserAPIService extends APIService {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
-                    callback.error();
+                    callback.error(String.valueOf(response.code()));
                     return;
                 }
                 Type listType = new TypeToken<List<Deck>>(){}.getType();
@@ -183,7 +183,7 @@ public class UserAPIService extends APIService {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.error();
+                callback.error(e.getMessage());
             }
         });
     }
@@ -196,7 +196,7 @@ public class UserAPIService extends APIService {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (!response.isSuccessful() || response.body() == null) {
-                    callback.error();
+                    callback.error(String.valueOf(response.code()));
                     return;
                 }
                 callback.setObj(BitmapFactory.decodeStream(response.body().byteStream()));
@@ -205,7 +205,7 @@ public class UserAPIService extends APIService {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.error();
+                callback.error(e.getMessage());
             }
         });
     }

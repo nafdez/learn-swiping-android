@@ -81,7 +81,7 @@ public class OwnedDecksFragment extends Fragment {
             }
 
             @Override
-            public void error() {
+            public void error(String error) {
             }
         };
 
@@ -123,7 +123,7 @@ public class OwnedDecksFragment extends Fragment {
                                     }
 
                                     @Override
-                                    public void error() {
+                                    public void error(String error) {
                                         requireActivity().runOnUiThread(() -> {
                                             Toast.makeText(requireContext(), String.format("%s %s", getString(R.string.owned_decks_toast_subscribe_error), deckList.get(position).getTitle()), Toast.LENGTH_SHORT).show();
                                         });
@@ -142,7 +142,7 @@ public class OwnedDecksFragment extends Fragment {
                             }
 
                             @Override
-                            public void error() {
+                            public void error(String error) {
                                 requireActivity().runOnUiThread(() -> {
                                     Toast.makeText(requireContext(), String.format("%s %s", getString(R.string.owned_decks_toast_delete_error), deckList.get(position).getTitle()), Toast.LENGTH_SHORT).show();
                                 });

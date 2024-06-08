@@ -144,7 +144,7 @@ public class DeckCreatorFragment extends Fragment implements View.OnClickListene
             }
 
             @Override
-            public void error() {
+            public void error(String error) {
                 ((Activity) CONTEXT).runOnUiThread(() -> {
                     Toast.makeText(requireContext(), getString(R.string.deck_editor_toast_save_error), Toast.LENGTH_SHORT).show();
                 });
@@ -157,7 +157,7 @@ public class DeckCreatorFragment extends Fragment implements View.OnClickListene
             }
 
             @Override
-            public void error() {
+            public void error(String error) {
                 ((Activity) CONTEXT).runOnUiThread(() -> {
                     Toast.makeText(requireContext(), getString(R.string.deck_editor_toast_image_error), Toast.LENGTH_SHORT).show();
                 });

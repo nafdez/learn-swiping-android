@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void error() {
+            public void error(String error) {
                 // Nothing, just don't add them
             }
         };
@@ -181,7 +181,7 @@ public class HomeFragment extends Fragment {
                                     }
 
                                     @Override
-                                    public void error() {
+                                    public void error(String error) {
                                         requireActivity().runOnUiThread(() -> {
                                             Toast.makeText(requireContext(), String.format("%s %s", getString(R.string.home_toast_unsubscribe_error), deckList.get(position).getTitle()), Toast.LENGTH_SHORT).show();
                                         });

@@ -74,7 +74,7 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
             }
 
             @Override
-            public void error() {
+            public void error(String error) {
                 ((Activity) CONTEXT).runOnUiThread(() ->{
                     imgProfile.setImageDrawable(AppCompatResources.getDrawable(CONTEXT, R.drawable.ic_fallback));
                 });

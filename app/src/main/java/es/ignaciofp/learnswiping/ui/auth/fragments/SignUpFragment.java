@@ -101,7 +101,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void error() {
+            public void error(String error) {
                 showAlert(CONTEXT.getString(R.string.global_generic_error));
             }
         };

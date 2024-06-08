@@ -36,8 +36,8 @@ public class DeckManager {
             }
 
             @Override
-            public void error() {
-                callback.error();
+            public void error(String error) {
+                callback.error(error);
             }
         });
     }
