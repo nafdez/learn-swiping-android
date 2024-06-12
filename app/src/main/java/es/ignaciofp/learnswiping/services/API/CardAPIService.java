@@ -1,11 +1,16 @@
 package es.ignaciofp.learnswiping.services.API;
 
-import com.google.gson.Gson;
+import android.content.Context;
+import android.util.Log;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.List;
 
 import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.models.card.Card;
+import es.ignaciofp.learnswiping.models.card.Progress;
 
 public class CardAPIService extends APIService {
 
@@ -41,14 +46,6 @@ public class CardAPIService extends APIService {
 
     }
 
-    public void cards(String token, long deckID, APICallback<List<Card>> callback) {
-        String endpoint = String.format("%s/%s/cards", DECK_ENDPOINT, deckID);
-        callback.setGson(BASIC_GSON);
-        HTTP_CLIENT
-                .newCall(makeRequest(endpoint, token, METHOD_GET, TEXT_PLAIN, ""))
-                .enqueue(callback);
-    }
-
     public void card(String token, long deckID, long cardID, APICallback<Card> callback) {
         String endpoint = String.format("%s/%s/%s", DECK_ENDPOINT, deckID, cardID);
         callback.setGson(BASIC_GSON);
@@ -57,12 +54,46 @@ public class CardAPIService extends APIService {
                 .enqueue(callback);
     }
 
+    public void cards(String token, long deckID, APICallback<List<Card>> callback) {
+        String endpoint = String.format("%s/%s/cards", DECK_ENDPOINT, deckID);
+        callback.setGson(BASIC_GSON);
+
+        // If token is provided with this request, is gonna retrieve pending cards, not all cards
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
+    }
+
+    public void pending(String token, long deckID, APICallback<List<Card>> callback) {
+        String endpoint = String.format("%s/%s/cards", DECK_ENDPOINT, deckID);
+        callback.setGson(BASIC_GSON);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
+    }
+
+    public void update(Card card, long deckID, APICallback<Void> callback) {
+    }
+
     public void delete(String token, long deckID, long cardID, APICallback<Void> callback) {
         String endpoint = String.format("%s/%s/%s", DECK_ENDPOINT, deckID, cardID);
         if (callback != null)
             callback.setGson(BASIC_GSON);
         HTTP_CLIENT
             .newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, ""))
+                .enqueue(callback);
+    }
+
+    public void progress(String token, long cardID, APICallback<Progress> callback) {
+        String endpoint = String.format("progress/%s", cardID);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint , token, METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
+    }
+
+    public void updateProgress(String token, Progress progress, APICallback<Void> callback) {
+        HTTP_CLIENT
+                .newCall(makeRequest("progress", token, METHOD_PUT, APPLICATION_JSON, BASIC_GSON.toJson(progress)))
                 .enqueue(callback);
     }
 }

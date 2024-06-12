@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -35,6 +36,7 @@ import es.ignaciofp.learnswiping.managers.UserManager;
 import es.ignaciofp.learnswiping.models.card.Card;
 import es.ignaciofp.learnswiping.models.deck.Deck;
 import es.ignaciofp.learnswiping.services.HomeService;
+import es.ignaciofp.learnswiping.services.StudyService;
 import es.ignaciofp.learnswiping.ui.home.fragments.HomeFragment;
 import es.ignaciofp.learnswiping.ui.home.fragments.card.CardEditorFragment;
 import es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment;
@@ -42,6 +44,9 @@ import es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment;
 public class StudyFragment extends Fragment {
 
     private FragmentStudyBinding binding;
+
+    private final CardManager CARD_MANAGER = CardManager.getInstance();
+    private final StudyService STUDY_SERVICE = StudyService.getInstance();
 
     private Deck deck;
 
@@ -51,6 +56,8 @@ public class StudyFragment extends Fragment {
 
     private TextView txtDeckTitle;
 
+    private FloatingActionButton fabStudy;
+
     private APICallback<List<Card>> cardListCallback;
 
     @Override
@@ -59,6 +66,8 @@ public class StudyFragment extends Fragment {
         binding = FragmentStudyBinding.inflate(inflater, container, false);
 
         txtDeckTitle = binding.txtStudyScreenDeckTitle;
+        fabStudy = binding.fabStartStudying;
+
         rvCard = binding.rvStudyCard;
 
         return binding.getRoot();
@@ -78,6 +87,8 @@ public class StudyFragment extends Fragment {
                     .show();
             return;
         }
+
+        fabStudy.setOnClickListener(this::startStudying);
 
         txtDeckTitle.setText(deck.getTitle());
 
@@ -114,7 +125,7 @@ public class StudyFragment extends Fragment {
             }
         };
 
-        CardManager.getInstance().cards(requireContext(), deck.getID(), cardListCallback);
+        CARD_MANAGER.cards(requireContext(), deck.getID(), cardListCallback);
     }
 
     private void onCardClick(int position) {
@@ -147,11 +158,11 @@ public class StudyFragment extends Fragment {
                         .findNavController(requireView())
                         .navigate(R.id.action_navigation_study_to_cardEditorFragment, b);
             } else if (item.getItemId() == R.id.menuItemDelete) {
-                CardManager.getInstance().delete(
+                CARD_MANAGER.delete(
                         requireContext(),
                         deck.getID(),
                         cardList.get(position).getCardID(),
-                        new APICallback<Void>(requireContext(), Void.class) {
+                        new APICallback<>(requireContext(), Void.class) {
                             @Override
                             public void call(Void obj) {
                                 cardList.remove(position);
@@ -169,5 +180,37 @@ public class StudyFragment extends Fragment {
             return false;
         });
         popupMenu.show();
+    }
+
+    private void startStudying(View v) {
+        CARD_MANAGER.pending(
+                requireContext(),
+                deck.getID(),
+                new APICallback<>(requireContext(), (Class<List<Card>>) (Object) List.class, Card.class) {
+                    @Override
+                    public void call(List<Card> cards) {
+                        requireActivity().runOnUiThread(() -> {
+                            STUDY_SERVICE.feedCardList(cards);
+                            Card currCard = STUDY_SERVICE.next();
+                            if (currCard == null) {
+                                error("");
+                                return;
+                            }
+                            Bundle b = new Bundle();
+                            b.putLong(StudyCardFragment.ARG_DECK_ID, deck.getID());
+                            b.putLong(StudyCardFragment.ARG_CARD_ID, currCard.getCardID());
+                            Navigation
+                                    .findNavController(requireView())
+                                    .navigate(R.id.action_navigation_study_to_studyCardFragment, b);
+                        });
+                    }
+
+                    @Override
+                    public void error(String error) {
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "No cards left!", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                });
     }
 }

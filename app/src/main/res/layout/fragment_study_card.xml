@@ -4,128 +4,313 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.fragments.study.StudyCardFragment"
-    android:padding="20dp">
+    tools:context=".ui.home.fragments.study.StudyCardFragment">
 
-    <TextView
-        android:id="@+id/txtStudyCardTitle"
-        style="?attr/textAppearanceHeadlineMedium"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtStudyCardFront"
-        style="?attr/textAppearanceBodyMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Front"
-        app:layout_constraintBottom_toTopOf="@+id/cntLytButtonFrontCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudyCardTitle" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tlbCard"
+            style="@style/Widget.Material3.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/menu_toolbar_card"
+            android:background="?attr/colorSurface"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:title="Card"
+            app:titleTextColor="?attr/colorOnSurface"/>
 
-    <TextView
-        android:id="@+id/txtStudyCardBack"
-        style="?attr/textAppearanceBodyMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/cntLytButtonBackCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudyCardTitle" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cntLytButtonFrontCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        android:padding="20dp">
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/materialDivider4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnCardFlip"
-            tools:layout_editor_absoluteX="20dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCardFlip"
-            style="?attr/materialIconButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Flip!"
-            app:icon="@drawable/ic_foward"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    
-
-<!--  This is only supposed to show on the back of the card  -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cntLytButtonBackCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/materialDivider3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnCardHard"
-            tools:layout_editor_absoluteX="20dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCardBury"
-            style="?attr/materialIconButtonStyle"
+        <TextView
+            android:id="@+id/txtStudyCardFront"
+            style="?attr/textAppearanceBodyMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bury"
-            app:icon="@drawable/ic_delete"
-            app:layout_constraintBottom_toBottomOf="@+id/btnCardHard"
-            app:layout_constraintEnd_toStartOf="@+id/btnCardHard"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:text="Front"
+            app:layout_constraintBottom_toTopOf="@+id/cntLytButtonFrontCard"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnCardHard" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCardHard"
-            style="?attr/materialIconButtonStyle"
+        <TextView
+            android:id="@+id/txtStudyCardBack"
+            style="?attr/textAppearanceBodyMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hard..."
-            app:icon="@drawable/ic_cross"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnCardEasy"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnCardBury" />
+            android:text="Back"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/cntLytButtonBackCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCardEasy"
-            style="?attr/materialIconButtonStyle"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cntLytButtonFrontCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Easy!"
-            app:icon="@drawable/ic_star"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnCardHard"
-            app:layout_constraintTop_toTopOf="@+id/btnCardHard" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDivider4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnCardFlip"
+                tools:layout_editor_absoluteX="20dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCardFlip"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Flip!"
+                app:icon="@drawable/ic_foward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--  This is only supposed to show on the back of the card  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cntLytButtonBackCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDivider3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnCardHard"
+                tools:layout_editor_absoluteX="20dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCardAgain"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Again"
+                app:icon="@drawable/ic_sentiment_very_dissatisfied"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCardHard"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCardHard"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hard"
+                app:icon="@drawable/ic_sentiment_dissatisfied"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCardGood"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCardAgain"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCardGood"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good"
+                app:icon="@drawable/ic_sentiment_neutral"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCardEasy"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCardHard"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCardEasy"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easy!"
+                app:icon="@drawable/ic_sentiment_very_satisfied"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCardAgain"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCardGood"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+<!--    -->
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/btnGoBack"-->
+<!--        style="?attr/materialIconButtonStyle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:icon="@drawable/ic_undo"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/txtStudyCardTitle"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/txtStudyCardTitle"-->
+<!--        app:layout_constraintHorizontal_bias="0.005"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/txtStudyCardTitle" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtStudyCardTitle"-->
+<!--        style="?attr/textAppearanceHeadlineMedium"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Card"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/btnCardFlipAgain"-->
+<!--        style="?attr/materialIconButtonStyle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:icon="@drawable/ic_flip"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintHorizontal_bias="0.995"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/txtStudyCardTitle"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/txtStudyCardTitle"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/txtStudyCardTitle" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtStudyCardFront"-->
+<!--        style="?attr/textAppearanceBodyMedium"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Front"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/cntLytButtonFrontCard"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtStudyCardTitle" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtStudyCardBack"-->
+<!--        style="?attr/textAppearanceBodyMedium"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Back"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/cntLytButtonBackCard"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtStudyCardTitle" />-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/cntLytButtonFrontCard"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <com.google.android.material.divider.MaterialDivider-->
+<!--            android:id="@+id/materialDivider4"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/btnCardFlip"-->
+<!--            tools:layout_editor_absoluteX="20dp" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnCardFlip"-->
+<!--            style="?attr/materialIconButtonStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Flip!"-->
+<!--            app:icon="@drawable/ic_foward"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--    &lt;!&ndash;  This is only supposed to show on the back of the card  &ndash;&gt;-->
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/cntLytButtonBackCard"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <com.google.android.material.divider.MaterialDivider-->
+<!--            android:id="@+id/materialDivider3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/btnCardHard"-->
+<!--            tools:layout_editor_absoluteX="20dp" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnCardBury"-->
+<!--            style="?attr/materialIconButtonStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Bury"-->
+<!--            app:icon="@drawable/ic_delete"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/btnCardHard"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnCardHard"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/btnCardHard" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnCardHard"-->
+<!--            style="?attr/materialIconButtonStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Hard..."-->
+<!--            app:icon="@drawable/ic_cross"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnCardEasy"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btnCardBury" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnCardEasy"-->
+<!--            style="?attr/materialIconButtonStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Easy!"-->
+<!--            app:icon="@drawable/ic_star"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btnCardHard"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/btnCardHard" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
