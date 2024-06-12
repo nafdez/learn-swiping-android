@@ -66,7 +66,6 @@
             android:ellipsize="end"
             android:maxLines="2"
 
-            android:text="INTRODUCTION TO SPANISH GRAMMAR II TEXTO BIEN LARGO Y PERRÓN"
             android:textAppearance="?attr/textAppearanceTitleSmall"
 
             app:layout_constraintBottom_toTopOf="@+id/txtDeckDescriptionDetails"
@@ -82,7 +81,6 @@
             android:ellipsize="end"
             android:maxLines="5"
 
-            android:text="Spanish grammar for dummies. Learn various spanish topics along it's grammar rules in a very funny way! Testing the longiness of thy text, abcdefghijklmnopqrstuv"
             android:textAppearance="?attr/textAppearanceBodySmall"
 
             app:layout_constraintBottom_toBottomOf="@id/crdImgAccContainer"
@@ -98,7 +96,6 @@
             android:layout_marginStart="10dp"
             android:gravity="center"
 
-            android:text="4/5"
             android:textAppearance="?attr/textAppearanceLabelLarge"
 
             android:drawableStart="@drawable/ic_star_half_filled"
@@ -130,5 +127,16 @@
             app:layout_constraintTop_toBottomOf="@+id/txtRatingDeckDetails" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:contentDescription="@string/home_ctn_desc_fab_add_deck"
+        android:src="@drawable/ic_add_circle_24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

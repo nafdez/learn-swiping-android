@@ -19,18 +19,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_study"
-        android:name="es.ignaciofp.learnswiping.ui.home.fragments.StudyFragment"
-        android:label="@string/title_study"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_exam"
-        android:name="es.ignaciofp.learnswiping.ui.home.fragments.ExamFragment"
-        android:label="@string/title_exam"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
         android:id="@+id/navigation_account"
         android:name="es.ignaciofp.learnswiping.ui.home.fragments.account.AccountFragment"
         android:label="@string/title_account"
@@ -53,5 +41,74 @@
         android:id="@+id/deckDetailsFragment"
         android:name="es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment"
         android:label="fragment_deck_details"
-        tools:layout="@layout/fragment_deck_details" />
+        tools:layout="@layout/fragment_deck_details" >
+        <argument
+            android:name="DECK_ID"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="HAS_SUBSCRIPTION"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="MODE"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_deckDetailsFragment_to_cardEditorFragment"
+            app:destination="@id/cardEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardEditorFragment"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.card.CardEditorFragment"
+        android:label="fragment_card_editor"
+        tools:layout="@layout/fragment_card_editor" >
+        <argument
+            android:name="DECK_ID"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="CARD_ID"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="EDIT_MODE"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="DECK_TITLE"
+            app:argType="string"
+            android:defaultValue="Deck" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_study"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.study.StudyFragment"
+        android:label="fragment_study"
+        tools:layout="@layout/fragment_study" >
+        <action
+            android:id="@+id/action_navigation_study_to_studyCardFragment"
+            app:destination="@id/studyCardFragment" />
+        <action
+            android:id="@+id/action_navigation_study_to_cardEditorFragment"
+            app:destination="@id/cardEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_exam"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.ExamFragment"
+        android:label="fragment_exam"
+        tools:layout="@layout/fragment_exam" />
+    <fragment
+        android:id="@+id/studyCardFragment"
+        android:name="es.ignaciofp.learnswiping.ui.home.fragments.study.StudyCardFragment"
+        android:label="fragment_study_card"
+        tools:layout="@layout/fragment_study_card" >
+        <argument
+            android:name="DECK_ID"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="CARD_ID"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
 </navigation>

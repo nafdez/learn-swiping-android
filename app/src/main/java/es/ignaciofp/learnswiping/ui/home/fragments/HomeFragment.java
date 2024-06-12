@@ -32,7 +32,7 @@ import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentHomeBinding;
 import es.ignaciofp.learnswiping.managers.DeckManager;
 import es.ignaciofp.learnswiping.managers.UserManager;
-import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.models.deck.Deck;
 import es.ignaciofp.learnswiping.services.HomeService;
 import es.ignaciofp.learnswiping.ui.home.MainActivity;
 import es.ignaciofp.learnswiping.ui.home.fragments.deck.DeckDetailsFragment;
@@ -102,9 +102,6 @@ public class HomeFragment extends Fragment {
         deckListCallback = new APICallback<>(requireContext(), (Class<List<Deck>>)(Object)List.class, Deck.class) {
             @Override
             public void call(List<Deck> decks) {
-                for (Deck deck : decks) {
-                    Log.d("PRUEAS", deck.toString());
-                }
                 decks.stream()
                         .sorted(Comparator.comparing(Deck::getUpdatedAt).reversed())
                         .forEachOrdered(deckList::add);
@@ -166,9 +163,9 @@ public class HomeFragment extends Fragment {
                 // Open deck details fragment
                 Bundle bundle = new Bundle();
                 bundle.putLong(DeckDetailsFragment.ARG_DECK_ID, deckList.get(position).getID());
-                bundle.putBoolean(DeckDetailsFragment.ARG_HAS_SUBSCRIPTION, false);
+                bundle.putBoolean(DeckDetailsFragment.ARG_HAS_SUBSCRIPTION, true);
                 bundle.putInt(DeckDetailsFragment.ARG_MODE, DeckDetailsFragment.MODE_SUB);
-                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_deckDetailsFragment);
+                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_deckDetailsFragment, bundle);
             } else if (item.getItemId() == R.id.menuItemUnsubscribe) {
                 // Unsubscribe and remove from rv if successful
                 DeckManager.getInstance()

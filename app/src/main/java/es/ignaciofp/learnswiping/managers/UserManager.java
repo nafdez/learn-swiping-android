@@ -7,7 +7,7 @@ import java.util.List;
 
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
-import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.models.deck.Deck;
 import es.ignaciofp.learnswiping.models.User;
 import es.ignaciofp.learnswiping.services.API.UserAPIService;
 

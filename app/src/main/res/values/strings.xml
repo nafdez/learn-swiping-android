@@ -62,5 +62,6 @@
     <string name="account_txt_title_stats">Stats</string>
     <string name="deck_details_btn_subscribe">Subscribe</string>
     <string name="deck_details_btn_unsubscribe">Unsubscribe</string>
+    <string name="menu_item_card_edit">Edit</string>
 
 </resources>

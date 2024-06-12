@@ -1,4 +1,4 @@
-package es.ignaciofp.learnswiping.models;
+package es.ignaciofp.learnswiping.models.deck;
 
 import com.google.gson.annotations.SerializedName;
 

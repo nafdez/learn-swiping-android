@@ -32,7 +32,7 @@ import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.callables.APICallback;
 import es.ignaciofp.learnswiping.databinding.FragmentDeckCreatorBinding;
 import es.ignaciofp.learnswiping.managers.DeckManager;
-import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.models.deck.Deck;
 
 public class DeckCreatorFragment extends Fragment implements View.OnClickListener {
 

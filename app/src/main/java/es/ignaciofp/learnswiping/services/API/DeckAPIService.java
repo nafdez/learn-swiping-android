@@ -1,26 +1,18 @@
 package es.ignaciofp.learnswiping.services.API;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import androidx.annotation.NonNull;
-
-import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
-import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.models.deck.Deck;
+import es.ignaciofp.learnswiping.models.deck.DeckDetails;
 import es.ignaciofp.learnswiping.models.rating.Rating;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class DeckAPIService extends APIService {
 
@@ -40,24 +32,16 @@ public class DeckAPIService extends APIService {
         String json = String.format("{\n\"title\": \"%s\",\n\"description\": \"%s\",\n\"visible\": %s}", deck.getTitle(), deck.getDescription(), deck.isVisible());
 
         callback.setGson(BASIC_GSON);
-        HTTP_CLIENT.newCall(makeRequest(DECK_ENDPOINT, token, METHOD_POST, APPLICATION_JSON, json)).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(DECK_ENDPOINT, token, METHOD_POST, APPLICATION_JSON, json))
+                .enqueue(callback);
     }
 
     public void delete(String token, long deckID, APICallback<Void> callback) {
         String endpoint = String.format("%s/%s", DECK_ENDPOINT, deckID);
-//        HTTP_CLIENT.newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, "")).enqueue(new Callback() {
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) {
-//                if (response.isSuccessful()) callback.call();
-//                else callback.error(String.valueOf(response.code()));
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                callback.error(e.getMessage());
-//            }
-//        });
-        HTTP_CLIENT.newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, "")).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
     public void setDeckImage(String token, long deckID, Bitmap image, APICallback<Bitmap> callback) {
@@ -78,140 +62,75 @@ public class DeckAPIService extends APIService {
                 .put(reqBody)
                 .build();
 
-//        HTTP_CLIENT.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//                if (!response.isSuccessful()) {
-//                    callback.error(String.valueOf(response.code()));
-//                    return;
-//                }
-//                callback.call();
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                callback.error(e.getMessage());
-//            }
-//        });
-
-        HTTP_CLIENT.newCall(request).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(request)
+                .enqueue(callback);
     }
 
     public void addDeckSubscription(String token, long deckID, APICallback<Void> callback) {
         String endpoint = String.format("%s/subs/%s", DECK_ENDPOINT, deckID);
-//        HTTP_CLIENT.newCall(makeRequest(endpoint, token, METHOD_POST, TEXT_PLAIN, "")).enqueue(new Callback() {
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) {
-//                if (response.isSuccessful()) callback.call();
-//                else callback.error(String.valueOf(response.code()));
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                callback.error(e.getMessage());
-//            }
-//        });
-        HTTP_CLIENT.newCall(makeRequest(endpoint, token, METHOD_POST, TEXT_PLAIN, "")).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_POST, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
     public void removeDeckSubscription(String token, long deckID, APICallback<Void> callback) {
         String endpoint = String.format("%s/subs/%s", DECK_ENDPOINT, deckID);
-//        HTTP_CLIENT.newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, "")).enqueue(new Callback() {
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) {
-//                if (response.isSuccessful()) callback.call();
-//                else callback.error(String.valueOf(response.code()));
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                callback.error(e.getMessage());
-//            }
-//        });
-        HTTP_CLIENT.newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, "")).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
     public void deckPicture(String picID, APICallback<Bitmap> callback) {
         String endpoint = String.format("%s/%s", Constants.PICTURE_ENDPOINT, picID);
-//        HTTP_CLIENT.newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, "")).enqueue(new Callback() {
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) {
-//                if (!response.isSuccessful() || response.body() == null) {
-//                    callback.error(String.valueOf(response.code()));
-//                    return;
-//                }
-//                callback.setObj(BitmapFactory.decodeStream(response.body().byteStream()));
-//                callback.call();
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                callback.error(e.getMessage());
-//            }
-//        });
-        HTTP_CLIENT.newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, "")).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
-    private void deckDetailsOwner(String token, String username, String deckID, APICallback<Deck> callback) {
-        String endpoint = String.format("%s/subs/%s/%s", DECK_ENDPOINT, username, deckID);
-//        HTTP_CLIENT.newCall(makeRequest(endpoint, token, "GET", TEXT_PLAIN, "")).enqueue(new Callback() {
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//                if (!response.isSuccessful() || response.body() == null) {
-//                    callback.error(String.valueOf(response.code()));
-//                    return;
-//                }
-//                // Deck details
-////                callback.setObj(BitmapFactory.decodeStream(response.body().byteStream()));
-//                callback.call();
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//
-//            }
-//        });
+    public void deckDetailsOwner(String token, long deckID, APICallback<DeckDetails> callback) {
+        String endpoint = String.format("%s/%s", DECK_ENDPOINT, deckID);
 
         callback.setGson(BASIC_GSON);
-        HTTP_CLIENT.newCall(makeRequest(endpoint, token, "GET", TEXT_PLAIN, "")).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
-    private void deckDetailsSub() {
-
+    public void deckDetailsSubs(String token, String username, long deckID, APICallback<DeckDetails> callback) {
+        String endpoint = String.format("%s/subs/%s/%s", DECK_ENDPOINT, username, deckID);
+        callback.setGson(BASIC_GSON);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
-    private void rateDeck(String token, String deckID, int rating, APICallback<Void> callback) {
+    public void deckDetailsShop(long deckID, APICallback<DeckDetails> callback) {
+        String endpoint = String.format("shop/%s", deckID);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
+    }
+
+    public void rateDeck(String token, long deckID, int rating, APICallback<Void> callback) {
         String endpoint = String.format("%s/%s/rating/%s", DECK_ENDPOINT, deckID, rating);
-        HTTP_CLIENT.newCall(makeRequest(endpoint, token, "GET", TEXT_PLAIN, "")).enqueue(callback);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
-    private void deckRating(String deckID, APICallback<Rating> callback) {
+    public void deckRating(long deckID, APICallback<Rating> callback) {
         String endpoint = String.format("%s/%s/rating", DECK_ENDPOINT, deckID);
-        HTTP_CLIENT.newCall(makeRequest(endpoint, "", "GET", TEXT_PLAIN, "")).enqueue(callback);
+        callback.setGson(BASIC_GSON);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 
-    private Request makeRequest(String endpoint, String token, String method, String mediaTypeStr, String bodyStr) {
-        Request.Builder request = new Request.Builder()
-                .url(String.format("%s%s", Constants.BASE_URL, endpoint))
-                .addHeader("Token", token);
-
-        if (!method.equals(METHOD_GET)) {
-            MediaType mediaType = MediaType.parse(mediaTypeStr);
-            RequestBody body = RequestBody.create(bodyStr, mediaType);
-            request.method(method, body);
-        }
-
-        return request.build();
-    }
-
-    private Request makeJSONRequest(String endpoint, String json, String token) {
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(json, mediaType);
-        return new Request.Builder()
-                .url(Constants.BASE_URL + endpoint)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Token", token)
-                .build();
+    public void deleteDeckRating(String token, long deckID, APICallback<Void> callback) {
+        String endpoint = String.format("%s/%s/rating", DECK_ENDPOINT, deckID);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_DELETE, TEXT_PLAIN, ""))
+                .enqueue(callback);
     }
 }

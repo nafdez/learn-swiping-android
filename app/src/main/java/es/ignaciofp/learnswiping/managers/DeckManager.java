@@ -2,14 +2,15 @@ package es.ignaciofp.learnswiping.managers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
-import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.models.deck.Deck;
+import es.ignaciofp.learnswiping.models.deck.DeckDetails;
+import es.ignaciofp.learnswiping.models.rating.Rating;
 import es.ignaciofp.learnswiping.services.API.DeckAPIService;
 
-public class DeckManager {
+public class DeckManager extends Manager {
 
     private static DeckManager instance;
     private final DeckAPIService API_SERVICE = DeckAPIService.getInstance();
@@ -58,7 +59,27 @@ public class DeckManager {
         API_SERVICE.removeDeckSubscription(getToken(ctx), deckID, callback);
     }
 
-    private String getToken(Context ctx) {
-        return ctx.getSharedPreferences(Constants.PREF_KEY, Context.MODE_PRIVATE).getString(Constants.TOKEN_KEY, "");
+    public void deckDetailsOwner(Context ctx, long deckID, APICallback<DeckDetails> callback) {
+        API_SERVICE.deckDetailsOwner(getToken(ctx), deckID, callback);
+    }
+
+    public void deckDetailsSub(Context ctx, String username, long deckID, APICallback<DeckDetails> callback) {
+        API_SERVICE.deckDetailsSubs(getToken(ctx), username, deckID, callback);
+    }
+
+    public void deckDetailsShop(Context ctx, String username, long deckID, APICallback<DeckDetails> callback) {
+        API_SERVICE.deckDetailsShop(deckID, callback);
+    }
+
+    public void rateDeck(Context ctx, long deckID, int rating, APICallback<Void> callback) {
+        API_SERVICE.rateDeck(getToken(ctx), deckID, rating, callback);
+    }
+
+    public void deckRating(long deckID, APICallback<Rating> callback) {
+        API_SERVICE.deckRating(deckID, callback);
+    }
+
+    public void deleteDeckRating(Context ctx, long deckID, APICallback<Void> callback) {
+        API_SERVICE.deleteDeckRating(getToken(ctx), deckID, callback);
     }
 }

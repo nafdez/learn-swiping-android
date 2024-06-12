@@ -1,6 +1,6 @@
 package es.ignaciofp.learnswiping.services;
 
-import es.ignaciofp.learnswiping.models.Deck;
+import es.ignaciofp.learnswiping.models.deck.Deck;
 
 public class HomeService {
 

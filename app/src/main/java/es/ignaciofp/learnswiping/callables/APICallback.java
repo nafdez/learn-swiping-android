@@ -12,19 +12,17 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 import es.ignaciofp.learnswiping.R;
-import es.ignaciofp.learnswiping.models.Deck;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public abstract class APICallback<T> implements Callback {
 
@@ -82,13 +80,17 @@ public abstract class APICallback<T> implements Callback {
                 return;
             }
 
+            if (tClass.equals(Map.class)) {
+                Type mapType = TypeToken.getParameterized(Map.class, eClass, eClass).getType();
+                call(gson.fromJson(responseStr, mapType));
+            }
+
             if (tClass.equals(List.class)) { // guarrada a la vista
                 Type listType = TypeToken.getParameterized(tClass, eClass).getType();
                 call(gson.fromJson(responseStr, listType));
                 return;
             }
 
-            Log.d("PRUEAS", responseStr);
             call(gson.fromJson(responseStr, tClass));
 
 

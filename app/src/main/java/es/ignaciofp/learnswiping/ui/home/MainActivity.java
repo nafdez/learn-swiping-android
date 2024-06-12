@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         // When opening the app user in UserManager will be null
         // so request a login via token (if any)
         // If rejected, then go to auth activity
-        // TODO: login with token fails
         if (UserManager.getInstance().getUser() == null) {
             UserManager.getInstance().loginWithToken(this, new APICallback<>(this, User.class) {
                 @Override
@@ -63,16 +62,5 @@ public class MainActivity extends AppCompatActivity {
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
-    }
-
-    // Opens a fragment that uses all screen and hiding other UI elements
-    // Don't be confused with full screen fragments
-    public void openFormFragment() {
-//        getSupportFragmentManager().beginTransaction()
-//                .add(R.id.frmCntWholeActivityScreen, fragment)
-//                .commit();
-//        frgCntWholeActivityScreen.setVisibility(BottomNavigationView.VISIBLE);
-//        navHost.setVisibility(View.GONE);
-//        navView.setVisibility(BottomNavigationView.GONE);
     }
 }

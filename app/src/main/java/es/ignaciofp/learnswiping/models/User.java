@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+import es.ignaciofp.learnswiping.models.deck.Deck;
+
 public class User {
 
     @SerializedName("acc_id")

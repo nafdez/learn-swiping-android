@@ -8,7 +8,11 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.TimeZone;
 
+import es.ignaciofp.learnswiping.Constants;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public abstract class APIService {
 
@@ -26,4 +30,18 @@ public abstract class APIService {
     protected final String METHOD_POST = "POST";
     protected final String METHOD_PUT = "PUT";
     protected final String METHOD_DELETE = "DELETE";
+
+    protected Request makeRequest(String endpoint, String token, String method, String mediaTypeStr, String bodyStr) {
+        Request.Builder request = new Request.Builder()
+                .url(String.format("%s%s", Constants.BASE_URL, endpoint))
+                .addHeader("Token", token);
+
+        if (!method.equals(METHOD_GET)) {
+            MediaType mediaType = MediaType.parse(mediaTypeStr);
+            RequestBody body = RequestBody.create(bodyStr, mediaType);
+            request.method(method, body);
+        }
+
+        return request.build();
+    }
 }
