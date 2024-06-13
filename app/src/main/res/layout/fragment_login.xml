@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:text="@string/auth_btn_login_google"
         app:icon="@drawable/ic_google"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/go_sign_up_btn"
         app:layout_constraintStart_toStartOf="@id/go_sign_up_btn"
         />

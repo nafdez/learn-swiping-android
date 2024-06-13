@@ -29,6 +29,10 @@ public class Progress {
 
     }
 
+    public Progress(Progress p) {
+        this(p.getCardID(), p.getEase(), p.getInterval(), p.getPriority(), p.getDaysHidden(), p.getWatchCount(), p.getPriorityExam(), p.getDaysHiddenExam(), p.getAnswerCount(), p.getCorrectCount(), p.isRelearning(), p.isBuried());
+    }
+
     public Progress(long cardID, float ease, int interval, int priority, int daysHidden, int watchCount, int priorityExam, int daysHiddenExam, int answerCount, int correctCount, boolean isRelearning, boolean isBuried) {
         this.cardID = cardID;
         this.ease = ease;

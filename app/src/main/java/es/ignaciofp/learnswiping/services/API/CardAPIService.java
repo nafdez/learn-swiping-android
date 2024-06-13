@@ -86,6 +86,7 @@ public class CardAPIService extends APIService {
 
     public void progress(String token, long cardID, APICallback<Progress> callback) {
         String endpoint = String.format("progress/%s", cardID);
+        callback.setGson(BASIC_GSON);
         HTTP_CLIENT
                 .newCall(makeRequest(endpoint , token, METHOD_GET, TEXT_PLAIN, ""))
                 .enqueue(callback);

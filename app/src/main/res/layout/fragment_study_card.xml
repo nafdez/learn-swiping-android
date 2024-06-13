@@ -19,7 +19,6 @@
             style="@style/Widget.Material3.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/menu_toolbar_card"
             android:background="?attr/colorSurface"
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:title="Card"
@@ -61,7 +60,7 @@
             android:id="@+id/cntLytButtonFrontCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -93,9 +92,10 @@
             android:id="@+id/cntLytButtonBackCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.divider.MaterialDivider
@@ -121,6 +121,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
 
+            <TextView
+                android:id="@+id/txtLblDaysAgain"
+                style="?attr/textAppearanceLabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnCardAgain"
+                app:layout_constraintStart_toStartOf="@+id/btnCardAgain"
+                app:layout_constraintTop_toBottomOf="@+id/btnCardAgain" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCardHard"
                 style="?attr/materialIconButtonStyle"
@@ -134,6 +144,16 @@
                 app:layout_constraintStart_toEndOf="@+id/btnCardAgain"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/txtLblDaysHard"
+                style="?attr/textAppearanceLabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnCardHard"
+                app:layout_constraintStart_toEndOf="@+id/btnCardAgain"
+                app:layout_constraintTop_toBottomOf="@+id/btnCardHard" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCardGood"
@@ -149,6 +169,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
 
+            <TextView
+                android:id="@+id/txtLblDaysGood"
+                style="?attr/textAppearanceLabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnCardGood"
+                app:layout_constraintStart_toEndOf="@+id/btnCardHard"
+                app:layout_constraintTop_toBottomOf="@+id/btnCardGood" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCardEasy"
                 style="?attr/materialIconButtonStyle"
@@ -162,6 +192,16 @@
                 app:layout_constraintStart_toEndOf="@+id/btnCardGood"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/txtLblDaysEasy"
+                style="?attr/textAppearanceLabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnCardEasy"
+                app:layout_constraintStart_toEndOf="@+id/btnCardGood"
+                app:layout_constraintTop_toBottomOf="@+id/btnCardEasy" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

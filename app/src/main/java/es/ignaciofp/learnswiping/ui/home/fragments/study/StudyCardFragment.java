@@ -13,15 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.gson.annotations.SerializedName;
-
-import org.w3c.dom.Text;
 
 import es.ignaciofp.learnswiping.R;
 import es.ignaciofp.learnswiping.callables.APICallback;
@@ -63,9 +58,13 @@ public class StudyCardFragment extends Fragment {
 
     private Button btnFlip;
     private Button btnAgain;
+    private TextView txtAgain;
     private Button btnHard;
+    private TextView txtHard;
     private Button btnGood;
+    private TextView txtGood;
     private Button btnEasy;
+    private TextView txtEasy;
 
     private Progress progress;
     private APICallback<Progress> onProgressCallback;
@@ -108,9 +107,13 @@ public class StudyCardFragment extends Fragment {
 
         btnFlip = binding.btnCardFlip;
         btnAgain = binding.btnCardAgain;
+        txtAgain = binding.txtLblDaysAgain;
         btnHard = binding.btnCardHard;
+        txtHard = binding.txtLblDaysHard;
         btnGood = binding.btnCardGood;
+        txtGood = binding.txtLblDaysGood;
         btnEasy = binding.btnCardEasy;
+        txtEasy = binding.txtLblDaysEasy;
 
         return binding.getRoot();
     }
@@ -122,20 +125,36 @@ public class StudyCardFragment extends Fragment {
         toolbar.setNavigationOnClickListener(v -> Navigation.findNavController(v).popBackStack());
         toolbar.setOnMenuItemClickListener(this::onMenuClick);
 
-        btnFlip.setOnClickListener(this::swapUI);
+        btnFlip.setOnClickListener((v) -> new Thread(() -> {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignored) {
+
+            }
+            requireActivity().runOnUiThread(() -> swapUI(v));
+        }).start());
         btnEasy.setOnClickListener(this::easy);
         btnGood.setOnClickListener(this::good);
         btnHard.setOnClickListener(this::hard);
         btnAgain.setOnClickListener(this::again);
 
-        onProgressCallback = new APICallback<Progress>(requireContext(), Progress.class) {
+        onProgressCallback = new APICallback<>(requireContext(), Progress.class) {
             @Override
             public void call(Progress progress) {
                 StudyCardFragment.this.progress = progress;
+                requireActivity().runOnUiThread(() -> {
+                    txtAgain.setText(String.format(">%sd", calculateProgress(20).getDaysHidden()));
+                    txtHard.setText(String.format(">%sd", calculateProgress(15).getDaysHidden()));
+                    txtGood.setText(String.format(">%sd", calculateProgress(0).getDaysHidden()));
+                    txtEasy.setText(String.format(">%sd", calculateProgress(-15).getDaysHidden()));
+                });
             }
 
             @Override
             public void error(String error) {
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+                });
             }
         };
 
@@ -146,7 +165,10 @@ public class StudyCardFragment extends Fragment {
 
             @Override
             public void error(String error) {
-                requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "Connection to the server has failed", Toast.LENGTH_SHORT).show());
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(requireContext(), "Connection to the server has failed", Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(requireView()).popBackStack();
+                });
             }
         };
 
@@ -204,37 +226,30 @@ public class StudyCardFragment extends Fragment {
     }
 
     private void easy(View v) {
-        next(-15);
+        progress = calculateProgress(-15);
+        saveProgress();
+        next();
     }
 
     private void good(View v) {
-        next(0);
+        progress = calculateProgress(0);
+        saveProgress();
+        next();
     }
 
     private void hard(View v) {
-        next(15);
+        progress = calculateProgress(15);
+        saveProgress();
+        next();
     }
 
     private void again(View v) {
-        next(20, true);
+        swapUI(v);
+        progress = calculateProgress(20, true);
+        saveProgress();
     }
 
-    private void next(int easePercentage) {
-        next(easePercentage, false);
-    }
-
-    private void next(int easePercentage, boolean relearnMode) {
-        if (progress == null) progress = new Progress();
-        progress.setCardID(cardID);
-        float newEaseResult = progress.getEase() * ((progress.getEase() * easePercentage) / 100);
-        progress.setEase(newEaseResult >= 1 ? newEaseResult : 1); // Prevent 0 or negative days
-        progress.setDaysHidden((int) Math.ceil(progress.getEase()));
-        progress.setWatchCount(progress.getWatchCount() + 1);
-        progress.setCorrectCount(relearnMode ? progress.getCorrectCount() : progress.getCorrectCount() + 1);
-        progress.setRelearning(relearnMode);
-        CARD_MANAGER.saveProgress(requireContext(), progress, onNextCardCallback);
-        progress = new Progress();
-
+    private void next() {
         card = STUDY_SERVICE.next();
         if (card == null) {
             Navigation.findNavController(requireView()).popBackStack();
@@ -246,5 +261,31 @@ public class StudyCardFragment extends Fragment {
 
         loadCard();
         swapUI(requireView());
+    }
+
+    private Progress calculateProgress(int easePercentage) {
+        return calculateProgress(easePercentage, false);
+    }
+
+    private Progress calculateProgress(int easePercentage, boolean relearnMode) {
+        if (progress == null) progress = new Progress();
+
+        Progress p = new Progress(progress); // Copy of progress to avoid modifying the original
+
+        p.setCardID(cardID);
+        float newEaseResult = (float) Math.ceil(p.getEase() - ((p.getEase() * easePercentage) / 100));
+        p.setEase(newEaseResult >= 1 ? newEaseResult : 1); // Prevent 0 or negative days
+        p.setDaysHidden((int) p.getEase());
+        p.setWatchCount(p.getWatchCount() + 1);
+        p.setCorrectCount(relearnMode ? p.getCorrectCount() : p.getCorrectCount() + 1);
+        p.setRelearning(relearnMode);
+
+        return p;
+    }
+
+    private void saveProgress() {
+        CARD_MANAGER.saveProgress(requireContext(), progress, onNextCardCallback);
+        progress = new Progress();
+
     }
 }
