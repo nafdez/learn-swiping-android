@@ -48,7 +48,7 @@ public class CardManager extends Manager {
         API_SERVICE.progress(getToken(ctx), cardID, callback);
     }
 
-    public void updateProgress(Context ctx, Progress progress, APICallback<Void> callback) {
-        API_SERVICE.updateProgress(getToken(ctx), progress, callback);
+    public void saveProgress(Context ctx, Progress progress, APICallback<Void> callback) {
+        API_SERVICE.saveProgress(getToken(ctx), progress, callback);
     }
 }

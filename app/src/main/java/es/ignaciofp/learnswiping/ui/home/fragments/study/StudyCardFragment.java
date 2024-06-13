@@ -232,7 +232,7 @@ public class StudyCardFragment extends Fragment {
         progress.setWatchCount(progress.getWatchCount() + 1);
         progress.setCorrectCount(relearnMode ? progress.getCorrectCount() : progress.getCorrectCount() + 1);
         progress.setRelearning(relearnMode);
-        CARD_MANAGER.updateProgress(requireContext(), progress, onNextCardCallback);
+        CARD_MANAGER.saveProgress(requireContext(), progress, onNextCardCallback);
         progress = new Progress();
 
         card = STUDY_SERVICE.next();

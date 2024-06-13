@@ -91,7 +91,7 @@ public class CardAPIService extends APIService {
                 .enqueue(callback);
     }
 
-    public void updateProgress(String token, Progress progress, APICallback<Void> callback) {
+    public void saveProgress(String token, Progress progress, APICallback<Void> callback) {
         HTTP_CLIENT
                 .newCall(makeRequest("progress", token, METHOD_PUT, APPLICATION_JSON, BASIC_GSON.toJson(progress)))
                 .enqueue(callback);
