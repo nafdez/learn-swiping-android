@@ -96,7 +96,11 @@
         android:id="@+id/navigation_exam"
         android:name="es.ignaciofp.learnswiping.ui.home.fragments.ExamFragment"
         android:label="fragment_exam"
-        tools:layout="@layout/fragment_exam" />
+        tools:layout="@layout/fragment_exam" >
+        <action
+            android:id="@+id/action_navigation_exam_to_deckDetailsFragment"
+            app:destination="@id/deckDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studyCardFragment"
         android:name="es.ignaciofp.learnswiping.ui.home.fragments.study.StudyCardFragment"

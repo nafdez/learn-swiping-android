@@ -1,7 +1,10 @@
 package es.ignaciofp.learnswiping.managers;
 
+import android.content.ContentQueryMap;
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import java.util.List;
 
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
@@ -30,8 +33,8 @@ public class DeckManager extends Manager {
         API_SERVICE.create(getToken(ctx), deck, new APICallback<>(ctx, Deck.class) {
             @Override
             public void call(Deck deck) {
-                if (img != null)
-                    API_SERVICE.setDeckImage(getToken(ctx), getObj().getID(), img, imgCallback);
+                if (img != null && deck != null)
+                    API_SERVICE.setDeckImage(getToken(ctx), deck.getID(), img, imgCallback);
                 callback.setObj(deck);
                 callback.call(deck);
             }
@@ -57,6 +60,10 @@ public class DeckManager extends Manager {
 
     public void removeDeckSubscription(Context ctx, long deckID, APICallback<Void> callback) {
         API_SERVICE.removeDeckSubscription(getToken(ctx), deckID, callback);
+    }
+
+    public void shopTopN(Context ctx, int quantity, APICallback<List<Deck>> callback) {
+        API_SERVICE.shopTopN(getToken(ctx), quantity, callback);
     }
 
     public void deckDetailsOwner(Context ctx, long deckID, APICallback<DeckDetails> callback) {

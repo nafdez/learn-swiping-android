@@ -3,6 +3,7 @@ package es.ignaciofp.learnswiping.services.API;
 import android.graphics.Bitmap;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import es.ignaciofp.learnswiping.Constants;
 import es.ignaciofp.learnswiping.callables.APICallback;
@@ -88,6 +89,15 @@ public class DeckAPIService extends APIService {
                 .enqueue(callback);
     }
 
+    public void shopTopN(String token, int quantity, APICallback<List<Deck>> callback) {
+        String endpoint = String.format("shop/top/%s", quantity);
+
+        callback.setGson(BASIC_GSON);
+        HTTP_CLIENT
+                .newCall(makeRequest(endpoint, token, METHOD_GET, TEXT_PLAIN, ""))
+                .enqueue(callback);
+    }
+
     public void deckDetailsOwner(String token, long deckID, APICallback<DeckDetails> callback) {
         String endpoint = String.format("%s/%s", DECK_ENDPOINT, deckID);
 
@@ -107,6 +117,7 @@ public class DeckAPIService extends APIService {
 
     public void deckDetailsShop(long deckID, APICallback<DeckDetails> callback) {
         String endpoint = String.format("shop/%s", deckID);
+        callback.setGson(BASIC_GSON);
         HTTP_CLIENT
                 .newCall(makeRequest(endpoint, "", METHOD_GET, TEXT_PLAIN, ""))
                 .enqueue(callback);
